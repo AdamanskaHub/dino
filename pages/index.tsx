@@ -8,7 +8,7 @@ export default function Home() {
   const [activeView, setActiveView] = useState(false);
   const changeView = () => setActiveView(!activeView)
 
-  const [timeQty, setTime] = useState(0)
+  const [duration, setDuration] = useState(0)
 
 
 
@@ -25,9 +25,9 @@ export default function Home() {
             <h1 >
               Let's do this
         </h1>
-            <p c>
+            <p>
               How long for?
-          <input onChange={event => setTime(event.target.value)}></input>
+          <input onChange={event => setDuration(parseInt(event.target.value))}></input>
             </p>
             <p >
               What are you working on?
@@ -38,7 +38,7 @@ export default function Home() {
         ) : (
             <>
               <p>active view</p>
-              <Countdown timeQty={timeQty} />
+              <Countdown duration={duration} />
               <button onClick={changeView}>End</button>
             </>
           )}

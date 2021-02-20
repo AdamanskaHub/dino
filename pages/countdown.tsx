@@ -1,8 +1,12 @@
 import React, { useRef, useEffect, useState } from "react";
 
-export default function Countdown() {
+type CountdownProps = {
+    duration?: number;
+}
+
+export default function Countdown({ duration,}: CountdownProps) {
     // interface Props {
-    //     successState?: boolean;
+    //     duration?: num;
     //     }
 
     const [num, setNum] = useState(9);
@@ -10,7 +14,7 @@ export default function Countdown() {
     let intervalRef = useRef();
 
     // const decreaseNum = () => setNum((prev) => prev - 1);
-    const decreaseNum = () => setNum((prev) => prev == 0 ? prev = 'DONE' : prev - 1);
+    const decreaseNum = () => setNum((prev) => prev == 0 ? prev = 0 : prev - 1);
 
     useEffect(() => {
         console.log("USE EFFECT")
