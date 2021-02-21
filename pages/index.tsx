@@ -9,16 +9,16 @@ export default function Home() {
   const changeView = () => setActiveView(!activeView)
 
   const [duration, setDuration] = useState(0)
-
-
+  const [timeOver, setTimeOver] = useState(false)
+  // const countdownFinished = false
 
   return (
+    
     <div >
       {/* <Head>
         <title>Motivator</title>
         <link rel="icon" href="/favicon.ico" />
       </Head> */}
-
       <main>
         {!activeView ? (
           <>
@@ -33,15 +33,24 @@ export default function Home() {
               What are you working on?
           <input></input>
             </p>
-            <button onClick={() => { changeView(); }}>Start</button>
+            <button  onClick={()=>{setDuration(12); changeView()}}>12min</button>
+            <button  onClick={()=>{setDuration(5); changeView()}}>5min</button>
           </>
         ) : (
             <>
               <p>active view</p>
-              <Countdown duration={duration} />
+              <Countdown duration={duration} countdownFinished={timeOver =>{ 
+                (setTimeOver(true)),
+                // (changeView()),
+                (console.log("FINISHED"))
+                }
+                }/>
               <button onClick={changeView}>End</button>
             </>
           )}
+          {timeOver &&
+          <p>countdown finished</p>
+          }
 
       </main>
     </div>
