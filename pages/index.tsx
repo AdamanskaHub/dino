@@ -2,6 +2,7 @@ import Head from 'next/head'
 // import styles from '../styles/Home.css'
 import { useState } from 'react'
 import Countdown from './countdown'
+import DialogBox from './dialogBox'
 
 export default function Home() {
 
@@ -10,7 +11,6 @@ export default function Home() {
 
   const [duration, setDuration] = useState(0)
   const [timeOver, setTimeOver] = useState(false)
-  // const countdownFinished = false
   const [activity, setActivity] = useState("")
 
   return (
@@ -23,6 +23,7 @@ export default function Home() {
       <main>
         {!activeView ? (
           <>
+            <DialogBox />
             <h1 >
               Let's do this
         </h1>
