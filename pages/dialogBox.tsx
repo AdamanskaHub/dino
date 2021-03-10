@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Message from './messages'
 
 const messages = [
@@ -14,6 +14,8 @@ export default function DialogBox() {
     const [position, setPosition] = useState(0);
 
     const randomize = (lengthor) => { return Math.floor(Math.random() * lengthor.length)}
+
+    React.useEffect(() => nextLine(), [])// <-- empty array means 'run once'
 
     const nextLine = () => {
 
