@@ -40,7 +40,7 @@ export default function DialogBox() {
     const randomize = (lengthor) => { return Math.floor(Math.random() * lengthor.length)}
 
     React.useEffect(() => {
-        document.cookie = `myLv=1; path=/; secure=Lax; samesite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`
+        document.cookie = `myLv=0; path=/; secure=Lax; samesite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`
         parseInt(cookieValue()) !== undefined ? lv = parseInt(cookieValue()) : lv = 0;
         nextLine();
     }, [])// <-- empty array means 'run once'
