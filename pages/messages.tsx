@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import { animated, useTransition } from "react-spring";
 
 const Message = ({ message }) => {
+    // console.log('message = '+message)
     const items = useMemo(
     () =>
         message.split("").map((letter, index) => ({
