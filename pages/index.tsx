@@ -11,7 +11,7 @@ export default function Home() {
 
   const [duration, setDuration] = useState(0)
   const [timeOver, setTimeOver] = useState(false)
-  const [activity, setActivity] = useState("")
+  const [activity, setActivity] = useState("welcome")
 
   return (
     
@@ -23,7 +23,7 @@ export default function Home() {
       <main>
         {!activeView ? (
           <>
-            <DialogBox />
+            <DialogBox screen={activity}/>
             <h1 >
               Let's do this
         </h1>
@@ -53,12 +53,13 @@ export default function Home() {
         ) : (
             <>
               <p>active view</p>
+              <DialogBox screen={activity}/>
               <Countdown duration={duration} countdownFinished={timeOver =>{ 
                 (setTimeOver(true)),
                 // (changeView()),
                 (console.log("FINISHED"))
-                }
-                }/>
+                }}
+              />
               <button onClick={changeView}>End</button>
             </>
           )}

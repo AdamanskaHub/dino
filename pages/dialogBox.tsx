@@ -1,6 +1,11 @@
 import React, { useState,useEffect } from "react";
 import Message from './messages';
 
+
+interface DialogBoxProps {
+    screen: string,
+}
+
 const messages = [
     [ // Level 0
         [{pic: '/other.png', txt:"ske 0"}, {pic: '/hunk.png', txt:"frog 0"}],
@@ -31,7 +36,7 @@ const cookieValue = () => {
 };
 
 
-export default function DialogBox() {
+const DialogBox = (props) =>{
 
     const [currentMessage, setCurrentMessage] = useState('');
     const [position, setPosition] = useState(0); // position in the text, line #
@@ -74,3 +79,4 @@ export default function DialogBox() {
 // TO DO :
 // if no cookie then set cookie, other take the existing one
 // when I get a level increase it in the lv and in the cookie myLv, always both
+export default DialogBox;
