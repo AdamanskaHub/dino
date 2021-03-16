@@ -15,7 +15,7 @@ export default function Home() {
 
   return (
     
-    <div >
+    <div className='bg'>
       {/* <Head>
         <title>Motivator</title>
         <link rel="icon" href="/favicon.ico" />

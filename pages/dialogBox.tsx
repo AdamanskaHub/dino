@@ -1,5 +1,6 @@
 import React, { useState,useEffect } from "react";
 import Message from './messages';
+// import jay_neutral from '../public/svg/jay_neutral.svg'
 
 
 interface DialogBoxProps {
@@ -8,7 +9,7 @@ interface DialogBoxProps {
 
 const messages = [
     [ // Level 0
-        [{pic: '/other.png', txt:"ske 0"}, {pic: '/hunk.png', txt:"frog 0"}],
+        [{pic: '/jay_neutral.svg', txt:"ske 0"}, {pic: '/hunk.png', txt:"frog 0"}],
         [{pic: '/other.png', txt:"ske 1"}, {pic: '/hunk.png', txt:"frog b1"}], 
         [{pic: '/other.png', txt:"ske 2"}, {pic: '/hunk.png', txt:"frog 2"}],
     ], 
@@ -26,7 +27,7 @@ const messages = [
 
 const welcome = [
     [ // Level 0
-        [{pic: '/other.png', txt:"welcome 0"}, {pic: '/hunk.png', txt:"AAAAAAH 0"}],
+        [{pic: '/jay_neutral.svg', txt:"welcome 0"}, {pic: '/jay_neutral.svg', txt:"AAAAAAH 0"}],
         [{pic: '/other.png', txt:"welcome 1"}, {pic: '/hunk.png', txt:"AAAAAAH b1"}], 
         [{pic: '/other.png', txt:"welcome 2"}, {pic: '/hunk.png', txt:"AAAAAAH 2"}],
     ], 
@@ -88,10 +89,10 @@ const DialogBox = (props) =>{
             <div onClick={()=>nextLine(props.screen)}>
             Next
             </div>
-            <button onClick={() => document.cookie = `myLv=1; path=/; secure=Lax; samesite=Lax; 
+            {/* <button onClick={() => document.cookie = `myLv=1; path=/; secure=Lax; samesite=Lax; 
             expires=Tue, 01 Jan 2030 00:00:00 GMT"`}>BRING ME AT LEVEL 1</button>
             <button onClick={() => document.cookie = `myLv=0; path=/; secure=Lax; samesite=Lax; 
-            expires=Tue, 01 Jan 2030 00:00:00 GMT"`}>BRING ME AT LEVEL 0</button>
+            expires=Tue, 01 Jan 2030 00:00:00 GMT"`}>BRING ME AT LEVEL 0</button> */}
             <img src={pic} alt="coach image"/>
         </div>
     )
