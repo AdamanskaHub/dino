@@ -14,16 +14,22 @@ export default function Home() {
 
 	return (
 		<div className="bg">
-			{/* <Head><title>Motivator</title><link rel="icon" href="/favicon.ico" /></Head> */}
+			<Head>
+				<title>Motivator</title>
+				<link rel="icon" href="/favicon.ico" />
+				<link rel="preconnect" href="https://fonts.gstatic.com" />
+				<link
+					href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=IBM+Plex+Mono&display=swap"
+					rel="stylesheet"
+				/>{" "}
+			</Head>
 			<main>
 				{!activeView ? (
-					<>
+					<div className="content">
 						<DialogBox screen={activity} />
 						<div className="action-box">
-							<h3 className="action-box action-box__title">
-								Title
-							</h3>
-							<div className="action-box action-box__buttons">
+							<h3 className="action-box__title">Title</h3>
+							<div className="action-box__btn">
 								<button
 									className="action-btn"
 									onClick={() => setActivity("study")}
@@ -45,25 +51,10 @@ export default function Home() {
 							</div>
 						</div>
 						{/* <p>How long for?<input onChange={event => setDuration(parseInt(event.target.value))}></input></p> */}
-						<p>What are you working on?</p>
-						<p>{activity}</p>
-						<p>How long for?</p>
-						{/* <button  onClick={()=>{setDuration(12); changeView()}}>12min</button><button  onClick={()=>{setDuration(5); changeView()}}>5min</button> */}
-						<button onClick={() => setDuration(12)}>12min</button>
-						<button onClick={() => setDuration(5)}>5min</button>
-
-						{activity != "" && duration != 0 && (
-							<button
-								className="action-btn action-btn--special"
-								onClick={changeView}
-							>
-								Let's {activity} for {duration}min
-							</button>
-						)}
-					</>
+					</div>
 				) : (
 					<>
-						<h3 className="action-box action-box__title">
+						<h3 className="action-box__title">
 							{activity} session
 						</h3>
 						<DialogBox screen={activity} />
