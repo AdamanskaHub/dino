@@ -5,7 +5,7 @@ module.exports = {
   // "singleQuote": true,
   // // "printWidth": 80,
   "tabWidth": 4,
-  tabWidth: 4,
+  // tabWidth: 4,
   // "singleQuote": true,
   "useTabs": true,
   "editor.tabSize": 2,

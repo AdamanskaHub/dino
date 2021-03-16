@@ -14,60 +14,58 @@ export default function Home() {
 
 	return (
 		<div className="bg">
-			{/* <Head>
-<title>Motivator</title>
-<link rel="icon" href="/favicon.ico" />
-</Head> */}
+			{/* <Head><title>Motivator</title><link rel="icon" href="/favicon.ico" /></Head> */}
 			<main>
 				{!activeView ? (
 					<>
 						<DialogBox screen={activity} />
 						<div className="action-box">
-							<div className="action-box action-box__title"></div>
+							<h3 className="action-box action-box__title">
+								Title
+							</h3>
 							<div className="action-box action-box__buttons">
-								<div
+								<button
 									className="action-btn"
 									onClick={() => setActivity("study")}
 								>
 									Study
-								</div>
-								<div
+								</button>
+								<button
 									className="action-btn"
 									onClick={() => setActivity("workout")}
 								>
 									Workout
-								</div>
-								<div
+								</button>
+								<button
 									className="action-btn"
 									onClick={() => setActivity("other")}
 								>
 									Other
-								</div>
+								</button>
 							</div>
 						</div>
-						{/* <p>
-How long for?
-<input onChange={event => setDuration(parseInt(event.target.value))}></input>
-</p> */}
+						{/* <p>How long for?<input onChange={event => setDuration(parseInt(event.target.value))}></input></p> */}
 						<p>What are you working on?</p>
 						<p>{activity}</p>
-
 						<p>How long for?</p>
-						{/* <button  onClick={()=>{setDuration(12); changeView()}}>12min</button>
-<button  onClick={()=>{setDuration(5); changeView()}}>5min</button> */}
-
+						{/* <button  onClick={()=>{setDuration(12); changeView()}}>12min</button><button  onClick={()=>{setDuration(5); changeView()}}>5min</button> */}
 						<button onClick={() => setDuration(12)}>12min</button>
 						<button onClick={() => setDuration(5)}>5min</button>
 
 						{activity != "" && duration != 0 && (
-							<button onClick={changeView}>
+							<button
+								className="action-btn action-btn--special"
+								onClick={changeView}
+							>
 								Let's {activity} for {duration}min
 							</button>
 						)}
 					</>
 				) : (
 					<>
-						<p>active view</p>
+						<h3 className="action-box action-box__title">
+							{activity} session
+						</h3>
 						<DialogBox screen={activity} />
 						<Countdown
 							duration={duration}
