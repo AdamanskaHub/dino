@@ -139,13 +139,12 @@ const DialogBox = (props) => {
 	}, []); // <-- empty array means 'run once'
 
 	function downHandler({ key }) {
-		if (key === "Enter") {
+		if (key === "Enter" || key === " ") {
 			document.querySelector("button").click();
 		}
 	}
 
 	const nextLine = (props) => {
-		console.log(props);
 		if (props === "welcome") {
 			props = welcome;
 		} else if (props === "study") {
@@ -154,18 +153,9 @@ const DialogBox = (props) => {
 		// console.log(lv + ' the prop is **** ' + props[0][0][0].txt)
 		if (position <= props[lv].length - 1) {
 			const randomNum = randomize(props[lv][position]);
-			console.log(
-				"here " +
-					position +
-					" - " +
-					randomNum +
-					" - " +
-					props[lv].length
-			);
 			setPic(props[lv][position][randomNum].pic);
 			setCurrentMessage(props[lv][position][randomNum].txt);
 			setPosition(position + 1);
-			console.log("there " + position);
 		}
 	};
 	// console.log('props in dialog box '+props.screen)
