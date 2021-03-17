@@ -121,7 +121,6 @@ const cookieValue = () => {
 
 const DialogBox = (props) => {
 	// console.log(props.screen)
-
 	const [currentMessage, setCurrentMessage] = useState("");
 	const [position, setPosition] = useState(0); // position in the text, line #
 	const [pic, setPic] = useState("");
@@ -131,6 +130,7 @@ const DialogBox = (props) => {
 	};
 
 	React.useEffect(() => {
+		window.addEventListener("keydown", downHandler);
 		document.cookie = `myLv=0; path=/; secure=Lax; samesite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`;
 		parseInt(cookieValue()) !== undefined
 			? (lv = parseInt(cookieValue()))
@@ -138,7 +138,14 @@ const DialogBox = (props) => {
 		nextLine("welcome");
 	}, []); // <-- empty array means 'run once'
 
+	function downHandler({ key }) {
+		if (key === "Enter") {
+			document.querySelector("button").click();
+		}
+	}
+
 	const nextLine = (props) => {
+		console.log(props);
 		if (props === "welcome") {
 			props = welcome;
 		} else if (props === "study") {
@@ -147,9 +154,18 @@ const DialogBox = (props) => {
 		// console.log(lv + ' the prop is **** ' + props[0][0][0].txt)
 		if (position <= props[lv].length - 1) {
 			const randomNum = randomize(props[lv][position]);
+			console.log(
+				"here " +
+					position +
+					" - " +
+					randomNum +
+					" - " +
+					props[lv].length
+			);
 			setPic(props[lv][position][randomNum].pic);
 			setCurrentMessage(props[lv][position][randomNum].txt);
 			setPosition(position + 1);
+			console.log("there " + position);
 		}
 	};
 	// console.log('props in dialog box '+props.screen)
@@ -160,13 +176,10 @@ const DialogBox = (props) => {
 			</div>
 			<div className="dialog-box">
 				<Message message={currentMessage} key={currentMessage} />
-				<div onClick={() => nextLine(props.screen)}>Next</div>
+				<button className="next" onClick={() => nextLine(props.screen)}>
+					Next
+				</button>
 			</div>
-
-			{/* <button onClick={() => document.cookie = `myLv=1; path=/; secure=Lax; samesite=Lax; 
-expires=Tue, 01 Jan 2030 00:00:00 GMT"`}>BRING ME AT LEVEL 1</button>
-<button onClick={() => document.cookie = `myLv=0; path=/; secure=Lax; samesite=Lax; 
-expires=Tue, 01 Jan 2030 00:00:00 GMT"`}>BRING ME AT LEVEL 0</button> */}
 		</div>
 	);
 };
@@ -174,3 +187,10 @@ expires=Tue, 01 Jan 2030 00:00:00 GMT"`}>BRING ME AT LEVEL 0</button> */}
 // TO DO :
 // when I get a level increase it in the lv and in the cookie myLv, always both
 export default DialogBox;
+
+{
+	/* <button onClick={() => document.cookie = `myLv=1; path=/; secure=Lax; samesite=Lax; 
+expires=Tue, 01 Jan 2030 00:00:00 GMT"`}>BRING ME AT LEVEL 1</button>
+<button onClick={() => document.cookie = `myLv=0; path=/; secure=Lax; samesite=Lax; 
+expires=Tue, 01 Jan 2030 00:00:00 GMT"`}>BRING ME AT LEVEL 0</button> */
+}
