@@ -58,7 +58,11 @@ const welcome = [
 	[
 		// Level 0
 		[
-			{ pic: "/jay_neutral.svg", txt: "welcome 0" },
+			{
+				pic: "/jay_neutral.svg",
+				txt:
+					"welcome 0 welcome 0 welcome 0 welcome 0 welcome 0 welcome 0 welcome 0 welcome 0 welcome 0 welcome 0 welcome 0 welcome 0 welcome 0 ",
+			},
 			{ pic: "/jay_neutral.svg", txt: "AAAAAAH 0" },
 		],
 		[
