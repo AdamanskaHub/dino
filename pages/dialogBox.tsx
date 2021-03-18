@@ -175,6 +175,8 @@ const DialogBox = (props) => {
 };
 
 // TO DO :
+// Absolute position button next and style the box
+// Move text to other file
 // when I get a level increase it in the lv and in the cookie myLv, always both
 export default DialogBox;
 
