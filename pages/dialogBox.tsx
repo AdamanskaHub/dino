@@ -61,7 +61,7 @@ const welcome = [
 			{
 				pic: "/jay_neutral.svg",
 				txt:
-					"welcome 0 welcome 0 welcome 0 welcome 0 welcome 0 welcome 0 welcome 0 welcome 0 welcome 0 welcome 0 welcome 0 welcome 0 welcome 0 ",
+					"welcome welcome welcome welcome welcome welcome welcome welcome welcome welcome welcome welcome welcome ",
 			},
 			{ pic: "/jay_neutral.svg", txt: "AAAAAAH 0" },
 		],

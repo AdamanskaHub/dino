@@ -19,7 +19,7 @@ a {
 
 /* VARIBLES */
 :root {
-	--primary: #c87c00;
+	--primary: #476f46;
 	--space: 8px;
 	--space2: 16px;
 	--arch: "Architects Daughter", cursive;
@@ -58,9 +58,10 @@ a {
 .dialog-box {
 	position: relative;
 	background-color: #fff;
-	border: 3px gray solid;
 	padding: var(--space2);
-	border-radius: 10px;
+	box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.25);
+	-webkit-box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.25);
+	-moz-box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.25);
 	margin-top: -3px;
 	height: 120px;
 	font-family: var(--arch);
