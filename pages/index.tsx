@@ -7,6 +7,7 @@ import DialogBox from "./dialogBox";
 export default function Home() {
 	const [activeView, setActiveView] = useState(false);
 	const changeView = () => setActiveView(!activeView);
+	const [choseActivityView, setChoseActivityView] = useState(false);
 
 	const [duration, setDuration] = useState(0);
 	const [timeOver, setTimeOver] = useState(false);
@@ -27,49 +28,99 @@ export default function Home() {
 				{!activeView ? (
 					<div className="content">
 						<DialogBox screen={activity} />
-						<div className="action-box">
-							<h3 className="action-box__title">Title</h3>
-							<div className="action-box__btn">
-								<button
-									className="action-btn"
-									onClick={() => setActivity("study")}
-								>
-									Study
-								</button>
-								<button
-									className="action-btn"
-									onClick={() => setActivity("workout")}
-								>
-									Workout
-								</button>
-								<button
-									className="action-btn"
-									onClick={() => setActivity("other")}
-								>
-									Other
-								</button>
+
+						{!choseActivityView ? (
+							<div className="action-box">
+								<h3 className="action-box__title">
+									What do you want to work on? {activity}
+								</h3>
+								<div className="action-box__btn">
+									<button
+										className="action-btn"
+										onClick={() => {
+											setActivity("study");
+											setChoseActivityView(
+												!choseActivityView
+											);
+										}}
+									>
+										Study
+									</button>
+									<button
+										className="action-btn"
+										onClick={() => setActivity("workout")}
+									>
+										Workout
+									</button>
+									<button
+										className="action-btn"
+										onClick={() => setActivity("other")}
+									>
+										Other
+									</button>
+								</div>
 							</div>
-						</div>
+						) : (
+							<div className="action-box">
+								<h3 className="action-box__title">
+									For how long? --{activity}--
+								</h3>
+								<div className="action-box__btn">
+									<button
+										className="action-btn"
+										onClick={() => setDuration(25 * 60)}
+									>
+										25min
+									</button>
+									<button
+										className="action-btn"
+										onClick={() => setDuration(60 * 60)}
+									>
+										1h
+									</button>
+									<button
+										className="action-btn"
+										onClick={() => {
+											setDuration(10);
+											setActiveView(!activeView);
+										}}
+									>
+										errrr
+									</button>
+								</div>
+							</div>
+						)}
 						{/* <p>How long for?<input onChange={event => setDuration(parseInt(event.target.value))}></input></p> */}
 					</div>
 				) : (
-					<>
-						<h3 className="action-box__title">
-							{activity} session
-						</h3>
+					<div className="content">
 						<DialogBox screen={activity} />
-						<Countdown
-							duration={duration}
-							countdownFinished={(timeOver) => {
-								setTimeOver(true),
-									// (changeView()),
-									console.log("FINISHED");
-							}}
-						/>
-						<button onClick={changeView}>End</button>
-					</>
+						<div className="action-box">
+							<h3 className="action-box__title">
+								{activity} session
+							</h3>
+							<Countdown
+								duration={duration}
+								countdownFinished={(timeOver) => {
+									setTimeOver(true),
+										// (changeView()),
+										console.log("FINISHED");
+								}}
+							/>
+
+							{timeOver ? (
+								<button
+									className="action-btn"
+									onClick={changeView}
+								>
+									End
+								</button>
+							) : (
+								<p>countdown finished</p>
+							)}
+						</div>
+					</div>
 				)}
-				{timeOver && <p>countdown finished</p>}
 			</main>
 		</div>
 	);
@@ -79,6 +130,6 @@ export default function Home() {
 // ---  Penser que c'est comme l'autre jeu débile ---
 // Intro dialogue
 // Choisir ce que je veux faire
-// lancer le timer
-// Plus de dialogue
+// lancer le timer => qd il est fini dialogue "inbetween"
+// Nouveau dialogue "encouragements" selon activité
 // Autre choix
