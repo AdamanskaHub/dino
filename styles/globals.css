@@ -137,3 +137,12 @@ main {
 .action-btn:hover {
 	background-color: var(--primaryH);
 }
+
+.timer {
+	color: var(--light);
+	font-family: var(--mono);
+	font-size: 64px;
+	margin: 0 0 var(--space) 0;
+	width: 100%;
+	text-align: center;
+}
