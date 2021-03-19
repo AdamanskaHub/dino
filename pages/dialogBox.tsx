@@ -63,11 +63,11 @@ const welcome = [
 				txt:
 					"welcome welcome welcome welcome welcome welcome welcome welcome welcome welcome welcome welcome welcome ",
 			},
-			{ pic: "/jay_neutral.svg", txt: "AAAAAAH 0" },
+			{ pic: "/jay_smirk.svg", txt: "AAAAAAH 0" },
 		],
 		[
 			{ pic: "/jay_neutral.svg", txt: "welcome 1" },
-			{ pic: "/jay_neutral.svg", txt: "AAAAAAH b1" },
+			{ pic: "/jay_smirk.svg", txt: "AAAAAAH b1" },
 		],
 		[
 			{ pic: "/jay_neutral.svg", txt: "welcome 2" },
@@ -175,7 +175,6 @@ const DialogBox = (props) => {
 };
 
 // TO DO :
-// Absolute position button next and style the box
 // Move text to other file
 // when I get a level increase it in the lv and in the cookie myLv, always both
 export default DialogBox;

@@ -19,9 +19,11 @@ a {
 
 /* VARIBLES */
 :root {
-	--primary: #476f46;
+	--primary: #327894;
+	--primaryH: #235a70;
 	--space: 8px;
 	--space2: 16px;
+	--light: #eee8dd;
 	--arch: "Architects Daughter", cursive;
 	--mono: "IBM Plex Mono", monospace;
 }
@@ -36,8 +38,16 @@ a {
 	height: 100vh;
 }
 
+main {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 .content {
 	display: flex;
+	max-width: 1200px;
+	width: 100%;
 }
 
 .vn {
@@ -45,10 +55,15 @@ a {
 	height: 100vh;
 	display: flex;
 	flex-direction: column;
+	position: relative;
 }
 
 .character-box {
-	height: calc(100% - 160px);
+	height: calc(100% - 40px);
+	transform: translate(-50%, 0%);
+	left: 50%;
+	bottom: 0;
+	position: absolute;
 }
 
 .character {
@@ -56,9 +71,9 @@ a {
 }
 
 .dialog-box {
-	position: relative;
-	background-color: #fff;
-	padding: var(--space2);
+	position: absolute;
+	background-color: rgba(0, 0, 0, 0.75);
+	padding: var(--space2) 24px;
 	box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.25);
 	-webkit-box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.25);
 	-moz-box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.25);
@@ -66,38 +81,41 @@ a {
 	height: 120px;
 	font-family: var(--arch);
 	font-size: 22px;
-	color: #333;
+	color: var(--light);
 	line-height: 1.2;
 	text-align: left;
+	bottom: 40px;
+	width: 100%;
 }
 
 .next {
 	position: absolute;
-	right: -10px;
-	bottom: -10px;
-	background-color: #333;
+	right: -4px;
+	bottom: -4px;
+	background-color: rgba(0, 0, 0, 0.75);
 	border: none;
 	height: 32px;
 	font-size: var(--space2);
-	color: #fff;
+	font-family: var(--arch);
+	color: var(--light);
 	padding: 8px var(--space2);
 }
 
 .action-box {
 	display: flex;
 	flex-direction: column;
-	min-width: 300px;
+	min-width: 240px;
 	height: 100%;
 	margin-top: 10%;
 	margin-left: 20px;
-	background-color: rgba(0, 0, 0, 0.8);
-	padding: 20px 10px;
-	color: #fff;
+	background-color: rgba(0, 0, 0, 0.75);
+	padding: 20px;
+	color: var(--light);
 }
 
 .action-box__title {
 	margin: 0 0 10px 0;
-	font-family: var(--mono);
+	font-family: var(--arch);
 }
 
 .action-box__btn {
@@ -107,13 +125,15 @@ a {
 
 .action-btn {
 	background-color: var(--primary);
-	color: #fff;
+	color: var(--light);
 	font-family: var(--mono);
 	border: none;
-	font-size: 18px;
+	border-radius: var(--space2);
+	font-size: var(--space2);
 	padding: 4px;
-	margin-bottom: 4px;
+	margin-bottom: var(--space);
+	text-transform: uppercase;
 }
 .action-btn:hover {
-	background-color: #9d660b;
+	background-color: var(--primaryH);
 }
