@@ -112,6 +112,7 @@ export default function Home() {
 										// (changeView()),
 										console.log("FINISHED");
 								}}
+								motivate={() => console.log("aaaah")}
 							/>
 
 							{!timeOver ? (

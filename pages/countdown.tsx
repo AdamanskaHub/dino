@@ -3,22 +3,28 @@ import React, { useEffect, useState } from "react";
 type CountdownProps = {
 	duration?: number;
 	countdownFinished?: any;
+	motivate?: any;
 };
 
 export default function Countdown({
 	duration,
 	countdownFinished,
+	motivate,
 }: CountdownProps) {
 	const [timeLeft, setTimeLeft] = useState(duration);
 	const [timePretty, setTimePretty] = useState(0);
 
 	const tellParent = () => countdownFinished(true);
+	const tellParentAgain = () => motivate(true);
+
+	// si 5min motivate true puis false
 
 	useEffect(() => {
 		if (timeLeft === 0) {
 			console.log("TIME LEFT IS 0");
 			setTimeLeft(0);
 			tellParent();
+			tellParentAgain();
 		}
 
 		// exit early when we reach 0
