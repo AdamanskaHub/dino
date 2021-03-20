@@ -100,7 +100,7 @@ export default function Home() {
 					</div>
 				) : (
 					<div className="content">
-						<DialogBox screen={activity} />
+						<DialogBox screen={activity + "On"} />
 						<div className="action-box">
 							<h3 className="action-box__title">
 								{activity} session
@@ -139,3 +139,5 @@ export default function Home() {
 // lancer le timer => qd il est fini dialogue "inbetween"
 // Nouveau dialogue "encouragements" selon activité
 // Autre choix
+
+// Si activité est study mais countdown actif alors autre TextEncoder, on passe {activity}+timeon

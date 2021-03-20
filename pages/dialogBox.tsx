@@ -54,6 +54,39 @@ const messages = [
 	],
 ];
 
+const studyOn = [
+	[
+		// Level 0
+		[
+			{ pic: "/jay_frown.svg", txt: "STUDY ON 0" },
+			{ pic: "/jay_frown.svg", txt: "STUDY ON 0" },
+		],
+		[
+			{ pic: "/jay_frown.svg", txt: "ske 1" },
+			{ pic: "/jay_frown.svg", txt: "frog b1" },
+		],
+		[
+			{ pic: "/jay_frown.svg", txt: "ske 2" },
+			{ pic: "/jay_frown.svg", txt: "frog 2" },
+		],
+	],
+	[
+		// Level 1
+		[
+			{ pic: "/jay_frown.svg", txt: "ske 1.0" },
+			{ pic: "/jay_frown.svg", txt: "frog 1.0" },
+		],
+		[
+			{ pic: "/jay_frown.svg", txt: "ske 1.1" },
+			{ pic: "/jay_frown.svg", txt: "frog b1.1" },
+		],
+		[
+			{ pic: "/jay_frown.svg", txt: "ske 1.2" },
+			{ pic: "/jay_frown.svg", txt: "frog 1.2" },
+		],
+	],
+];
+
 const welcome = [
 	[
 		// Level 0
@@ -120,7 +153,7 @@ const cookieValue = () => {
 };
 
 const DialogBox = (props) => {
-	// console.log(props.screen)
+	console.log(props.screen);
 	const [currentMessage, setCurrentMessage] = useState("");
 	const [position, setPosition] = useState(0); // position in the text, line #
 	const [pic, setPic] = useState("");
@@ -149,6 +182,10 @@ const DialogBox = (props) => {
 			props = welcome;
 		} else if (props === "study") {
 			props = messages;
+		} else if (props === "studyOn") {
+			props = studyOn;
+			setPosition(-1);
+			console.log("position");
 		}
 		// console.log(lv + ' the prop is **** ' + props[0][0][0].txt)
 		if (position <= props[lv].length - 1) {

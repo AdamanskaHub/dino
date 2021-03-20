@@ -104,7 +104,7 @@ main {
 .action-box {
 	display: flex;
 	flex-direction: column;
-	width: 380px;
+	width: 340px;
 	height: 100%;
 	margin-top: 10%;
 	margin-left: 20px;
@@ -116,6 +116,7 @@ main {
 .action-box__title {
 	margin: 0 0 10px 0;
 	font-family: var(--arch);
+	font-size: 24px;
 }
 
 .action-box__btn {

@@ -36,7 +36,7 @@ export default function Countdown({
 	}, [timeLeft]);
 
 	const secondsToHms = (timeAmount) => {
-		if (!timeAmount) return 1234;
+		if (!timeAmount) return 0;
 
 		let hours = timeAmount / 3600;
 		timeAmount = timeAmount % 3600;
