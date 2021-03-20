@@ -25,7 +25,7 @@ a {
 	--space2: 16px;
 	--light: #eee8dd;
 	--arch: "Architects Daughter", cursive;
-	--mono: "IBM Plex Mono", monospace;
+	--mono: "PT Mono", monospace;
 }
 
 .bg {
@@ -104,7 +104,7 @@ main {
 .action-box {
 	display: flex;
 	flex-direction: column;
-	min-width: 240px;
+	width: 380px;
 	height: 100%;
 	margin-top: 10%;
 	margin-left: 20px;

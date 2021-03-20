@@ -20,7 +20,7 @@ export default function Home() {
 				<link rel="icon" href="/favicon.ico" />
 				<link rel="preconnect" href="https://fonts.gstatic.com" />
 				<link
-					href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=IBM+Plex+Mono&display=swap"
+					href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=PT+Mono&family=IBM+Plex+Mono&display=swap"
 					rel="stylesheet"
 				/>{" "}
 			</Head>
@@ -68,13 +68,19 @@ export default function Home() {
 								<div className="action-box__btn">
 									<button
 										className="action-btn"
-										onClick={() => setDuration(25 * 60)}
+										onClick={() => {
+											setDuration(25 * 60);
+											setActiveView(!activeView);
+										}}
 									>
 										25min
 									</button>
 									<button
 										className="action-btn"
-										onClick={() => setDuration(60 * 60)}
+										onClick={() => {
+											setDuration(62 * 60);
+											setActiveView(!activeView);
+										}}
 									>
 										1h
 									</button>
@@ -108,7 +114,7 @@ export default function Home() {
 								}}
 							/>
 
-							{timeOver ? (
+							{!timeOver ? (
 								<button
 									className="action-btn"
 									onClick={changeView}
