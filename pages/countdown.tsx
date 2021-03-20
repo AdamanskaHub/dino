@@ -10,6 +10,7 @@ export default function Countdown({
 	countdownFinished,
 }: CountdownProps) {
 	const [timeLeft, setTimeLeft] = useState(duration);
+	const [timePretty, setTimePretty] = useState(0);
 
 	const tellParent = () => countdownFinished(true);
 
@@ -26,6 +27,7 @@ export default function Countdown({
 		// save intervalId to clear the interval when the component re-renders
 		const intervalId = setInterval(() => {
 			setTimeLeft(timeLeft - 1);
+			setTimePretty(secondsToHms(timeLeft - 1));
 		}, 1000);
 
 		// clear interval on re-render to avoid memory leaks
@@ -33,94 +35,57 @@ export default function Countdown({
 		// add timeLeft as a dependency to re-rerun the effect when we update it
 	}, [timeLeft]);
 
-	const secondsToHms = (duration) => {
-		if (!duration) return "nope";
+	const secondsToHms = (timeAmount) => {
+		if (!timeAmount) return 1234;
 
-		let hours = duration / 3600;
-		duration = duration % 3600;
-		let min = duration / 60;
-		duration = duration % 60;
+		let hours = timeAmount / 3600;
+		timeAmount = timeAmount % 3600;
+		let min = timeAmount / 60;
+		timeAmount = timeAmount % 60;
 
-		let sec = parseInt(duration);
+		let sec = parseInt(timeAmount);
+
+		// return min;
+
+		// if (min <= 1) {
+		// 	return `00:${sec}`;
+		// }
+		// if (hours !== 0) {
+		// 	return `${hours}:${min}:${sec}`;
+		// }
+
+		// return `${min}:${sec}`;
+		// return timeAmount;
 
 		if (sec < 10) {
 			sec = `0${sec}`;
 		}
-		if (min < 10) {
+		if (min < 10 || min < 10 || hours !== 0) {
 			min = `0${min}`;
 		}
-
-		if (parseInt(hours, 10) > 0) {
-			return `${parseInt(hours, 10)}h ${min}m ${sec}s`;
-		} else if (min == 0) {
-			return `${sec}s`;
-		} else {
-			return `${min}m ${sec}s`;
+		if (hours < 1) {
+			hours = 0;
 		}
+		if (min < 1) {
+			min = 0;
+		}
+
+		return hours === 0
+			? `${Math.floor(min)}:${sec}`
+			: `${Math.floor(hours)}:${Math.floor(min)}:${sec} --- ${min}`;
+
+		// if (parseInt(hours, 10) > 0) {
+		// 	return `${parseInt(hours, 10)}h ${min}m ${sec}s`;
+		// } else if (min == 0) {
+		// 	return `${sec}s`;
+		// } else {
+		// 	return `${min}m ${sec}s`;
+		// }
 	};
 
 	return (
 		<div>
-			<span className="timer">
-				{timeLeft} bfueiw {() => secondsToHms()}
-			</span>
+			<span className="timer">{timePretty}</span>
 		</div>
 	);
 }
-
-// const [num, setNum] = useState(duration);
-// const [pause, setPause] = useState(true);
-// let intervalRef = useRef();
-
-// const [countdownDone, setcountdownDone] = useState(false);
-
-// const [counter, setCounter] = useState(duration);
-// useEffect(
-// () => {
-//     const id = setInterval(() => {
-//     setCounter((count) => count === 0 ? (console.log("c'est 0"), (setcountdownDone(true)), (count= 0),
-//     (
-//     reset()
-//     )
-//     :
-//     (count - 1));
-//     }, 1000);
-//     return () => {
-//     clearInterval(id);
-//     };
-// },
-// [] // empty dependency array
-// );
-
-// const decreaseNum = () => setNum((prev) => prev - 1);
-// const decreaseNum = () => setNum((prev) => prev == 0 ? prev = 0  : prev - 1);
-// const decreaseNum = () => {
-//     setNum((prev)=>{
-//         if (prev === 0){
-//             countdownFinished=true;
-//             console.log("decreased");
-//             return prev = 0
-//         } else {
-//             console.log("AHAHAH decreased");
-//             prev -1;
-//         }
-//     })
-// }
-
-// useEffect(() => {
-//     console.log("USE EFFECT")
-//     setPause(false);
-//     intervalRef.current = setInterval
-//         (decreaseNum, 1000);
-//     return () => clearInterval(intervalRef.current);
-// }, []);
-
-// const handleClick = () => {
-//     if (!pause) {
-//         clearInterval(intervalRef.current);
-//     } else {
-//         intervalRef.current = setInterval
-//             (decreaseNum, 1000);
-//     }
-//     setPause((prev) => !prev);
-// };
