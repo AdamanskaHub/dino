@@ -184,8 +184,8 @@ const DialogBox = (props) => {
 			props = messages;
 		} else if (props === "studyOn") {
 			props = studyOn;
-			setPosition(-1);
-			console.log("position");
+			setPosition(0);
+			// console.log("position" + position);
 		}
 		// console.log(lv + ' the prop is **** ' + props[0][0][0].txt)
 		if (position <= props[lv].length - 1) {
