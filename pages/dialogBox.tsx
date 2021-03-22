@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, forwardRef, useImperativeHandle } from "react";
 import Message from "./messages";
 
 interface DialogBoxProps {
 	screen: string;
-	motivate?: any;
+	// motivate?: any;
+	timeLeft?: number;
 }
 
 const messages = [
@@ -62,12 +63,12 @@ const studyOn = [
 			{ pic: "/jay_frown.svg", txt: "STUDY ON 0" },
 		],
 		[
-			{ pic: "/jay_frown.svg", txt: "ske 1" },
-			{ pic: "/jay_frown.svg", txt: "frog b1" },
+			{ pic: "/jay_frown.svg", txt: "STUDY ON 1" },
+			{ pic: "/jay_frown.svg", txt: "STUDY ON b1" },
 		],
 		[
-			{ pic: "/jay_frown.svg", txt: "ske 2" },
-			{ pic: "/jay_frown.svg", txt: "frog 2" },
+			{ pic: "/jay_frown.svg", txt: "STUDY ON 2" },
+			{ pic: "/jay_frown.svg", txt: "STUDY ON b2" },
 		],
 	],
 	[
@@ -151,8 +152,9 @@ const cookieValue = () => {
 	}
 };
 
-const DialogBox = (props) => {
-	console.log(props.motivate, props.screen);
+const DialogBox = forwardRef((props, ref) => {
+	// console.log(props.motivate, props.screen);
+	// console.log("props " + JSON.stringify(props) + props.screen);
 	const [currentMessage, setCurrentMessage] = useState("");
 	const [position, setPosition] = useState(0); // position in the text, line #
 	const [pic, setPic] = useState("");
@@ -195,6 +197,17 @@ const DialogBox = (props) => {
 		}
 	};
 
+	useImperativeHandle(ref, () => ({
+		motivate() {
+			console.log("getAlert from Child");
+			nextLine("welcome");
+		},
+	}));
+
+	// if (props.timeLeft % 5 === 0 && props.timeLeft !== null) {
+	// 	nextLine(props.screen);
+	// }
+
 	// console.log('props in dialog box '+props.screen)
 	return (
 		<div className="vn">
@@ -207,9 +220,14 @@ const DialogBox = (props) => {
 					Next
 				</button>
 			</div>
+			{props.timeLeft % 5 === 0 ? (
+				<p>{props.timeLeft} modulo</p>
+			) : (
+				<p>{props.timeLeft} PASmodulo</p>
+			)}
 		</div>
 	);
-};
+});
 
 // TO DO :
 // Move text to other file

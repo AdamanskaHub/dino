@@ -1,6 +1,6 @@
 import Head from "next/head";
 import styles from "../styles/globals.css";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Countdown from "./countdown";
 import DialogBox from "./dialogBox";
 
@@ -13,7 +13,8 @@ export default function Home() {
 	const [activity, setActivity] = useState("welcome");
 
 	const [timeLeft, setTimeLeft] = useState(null);
-	const motivateMe = () => console.log("nooooo" + (timeLeft % 5));
+	// const motivateMe = () => childRef.current.motivate();
+	const childRef = useRef();
 
 	useEffect(() => {
 		// save intervalId to clear the interval when the component re-renders
@@ -25,7 +26,7 @@ export default function Home() {
 		if (!timeLeft) return;
 		if (timeLeft % 5 === 0) {
 			// setActivity("motivate");
-			motivateMe();
+			childRef.current.motivate();
 		}
 
 		const intervalId = setInterval(() => {
@@ -48,7 +49,6 @@ export default function Home() {
 				/>{" "}
 			</Head>
 			<main>
-				<p>{timeLeft} = time left</p>
 				{!activeView ? (
 					<div className="content">
 						<DialogBox screen={activity} motivateDialog />
@@ -126,7 +126,9 @@ export default function Home() {
 					<div className="content">
 						<DialogBox
 							screen={activity + "On"}
-							motivate={motivateMe()}
+							timeLeft={timeLeft}
+							ref={childRef}
+							// motivate={ref={childRef}}
 						/>
 						<div className="action-box">
 							<h3 className="action-box__title">
