@@ -1,46 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 type CountdownProps = {
-	duration?: number;
-	countdownFinished?: any;
-	motivate?: any;
+	timeLeft?: number;
 };
 
-export default function Countdown({
-	duration,
-	countdownFinished,
-	motivate,
-}: CountdownProps) {
-	const [timeLeft, setTimeLeft] = useState(duration);
-	const [timePretty, setTimePretty] = useState(0);
-
-	const tellParent = () => countdownFinished(true);
-	const tellParentAgain = () => motivate(true);
-
-	// si 5min motivate true puis false
-
-	useEffect(() => {
-		if (timeLeft === 0) {
-			console.log("TIME LEFT IS 0");
-			setTimeLeft(0);
-			tellParent();
-			tellParentAgain();
-		}
-
-		// exit early when we reach 0
-		if (!timeLeft) return;
-
-		// save intervalId to clear the interval when the component re-renders
-		const intervalId = setInterval(() => {
-			setTimeLeft(timeLeft - 1);
-			setTimePretty(secondsToHms(timeLeft - 1));
-		}, 1000);
-
-		// clear interval on re-render to avoid memory leaks
-		return () => clearInterval(intervalId);
-		// add timeLeft as a dependency to re-rerun the effect when we update it
-	}, [timeLeft]);
-
+export default function Countdown({ timeLeft }: CountdownProps) {
 	const secondsToHms = (timeAmount) => {
 		if (!timeAmount) return 0;
 
@@ -50,8 +14,6 @@ export default function Countdown({
 		timeAmount = timeAmount % 60;
 
 		let sec = parseInt(timeAmount);
-
-		// return min;
 
 		// if (min <= 1) {
 		// 	return `00:${sec}`;
@@ -88,10 +50,13 @@ export default function Countdown({
 		// 	return `${min}m ${sec}s`;
 		// }
 	};
+	const prettifiedTime = (time) => {
+		return secondsToHms(time);
+	};
 
 	return (
 		<div>
-			<span className="timer">{timePretty}</span>
+			<span className="timer">{prettifiedTime(timeLeft)}</span>
 		</div>
 	);
 }

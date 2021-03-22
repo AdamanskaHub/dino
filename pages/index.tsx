@@ -1,6 +1,6 @@
 import Head from "next/head";
 import styles from "../styles/globals.css";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Countdown from "./countdown";
 import DialogBox from "./dialogBox";
 
@@ -9,9 +9,27 @@ export default function Home() {
 	const changeView = () => setActiveView(!activeView);
 	const [choseActivityView, setChoseActivityView] = useState(false);
 
-	const [duration, setDuration] = useState(0);
 	const [timeOver, setTimeOver] = useState(false);
 	const [activity, setActivity] = useState("welcome");
+
+	const [timeLeft, setTimeLeft] = useState(null);
+
+	useEffect(() => {
+		// save intervalId to clear the interval when the component re-renders
+		if (timeLeft === 0) {
+			setTimeLeft(null);
+			console.log("TIME'S UP");
+			setTimeOver(true);
+		}
+		if (!timeLeft) return;
+
+		const intervalId = setInterval(() => {
+			setTimeLeft(timeLeft - 1);
+			console.log(timeLeft);
+		}, 1000);
+		// clear interval on re-render to avoid memory leaks
+		return () => clearInterval(intervalId);
+	}, [timeLeft]);
 
 	return (
 		<div className="bg">
@@ -25,9 +43,10 @@ export default function Home() {
 				/>{" "}
 			</Head>
 			<main>
+				<p>{timeLeft} = time left</p>
 				{!activeView ? (
 					<div className="content">
-						<DialogBox screen={activity} />
+						<DialogBox screen={activity} motivateDialog />
 
 						{!choseActivityView ? (
 							<div className="action-box">
@@ -69,7 +88,7 @@ export default function Home() {
 									<button
 										className="action-btn"
 										onClick={() => {
-											setDuration(25 * 60);
+											setTimeLeft(25 * 60);
 											setActiveView(!activeView);
 										}}
 									>
@@ -78,7 +97,7 @@ export default function Home() {
 									<button
 										className="action-btn"
 										onClick={() => {
-											setDuration(62 * 60);
+											setTimeLeft(62 * 60);
 											setActiveView(!activeView);
 										}}
 									>
@@ -87,11 +106,11 @@ export default function Home() {
 									<button
 										className="action-btn"
 										onClick={() => {
-											setDuration(10);
+											setTimeLeft(15);
 											setActiveView(!activeView);
 										}}
 									>
-										errrr
+										15s
 									</button>
 								</div>
 							</div>
@@ -100,20 +119,16 @@ export default function Home() {
 					</div>
 				) : (
 					<div className="content">
-						<DialogBox screen={activity + "On"} />
+						<DialogBox
+							screen={activity + "On"}
+							// sayMotivation={motivateMe}
+						/>
 						<div className="action-box">
 							<h3 className="action-box__title">
 								{activity} session
 							</h3>
-							<Countdown
-								duration={duration}
-								countdownFinished={(timeOver) => {
-									setTimeOver(true),
-										// (changeView()),
-										console.log("FINISHED");
-								}}
-								motivate={() => console.log("aaaah")}
-							/>
+							<p>{timeLeft}</p>
+							<Countdown timeLeft={timeLeft} />
 
 							{!timeOver ? (
 								<button

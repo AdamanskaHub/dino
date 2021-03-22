@@ -93,8 +93,7 @@ const welcome = [
 		[
 			{
 				pic: "/jay_neutral.svg",
-				txt:
-					"welcome welcome welcome welcome welcome welcome welcome welcome welcome welcome welcome welcome welcome ",
+				txt: "welcome welcome",
 			},
 			{ pic: "/jay_smirk.svg", txt: "AAAAAAH 0" },
 		],
