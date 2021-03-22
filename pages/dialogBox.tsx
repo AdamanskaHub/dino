@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Message from "./messages";
-// import jay_neutral from '../public/svg/jay_neutral.svg'
 
 interface DialogBoxProps {
 	screen: string;
+	motivate?: any;
 }
 
 const messages = [
@@ -152,7 +152,7 @@ const cookieValue = () => {
 };
 
 const DialogBox = (props) => {
-	console.log(props.screen);
+	console.log(props.motivate, props.screen);
 	const [currentMessage, setCurrentMessage] = useState("");
 	const [position, setPosition] = useState(0); // position in the text, line #
 	const [pic, setPic] = useState("");
@@ -194,6 +194,7 @@ const DialogBox = (props) => {
 			setPosition(position + 1);
 		}
 	};
+
 	// console.log('props in dialog box '+props.screen)
 	return (
 		<div className="vn">

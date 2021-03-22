@@ -13,6 +13,7 @@ export default function Home() {
 	const [activity, setActivity] = useState("welcome");
 
 	const [timeLeft, setTimeLeft] = useState(null);
+	const motivateMe = () => console.log("nooooo" + (timeLeft % 5));
 
 	useEffect(() => {
 		// save intervalId to clear the interval when the component re-renders
@@ -22,6 +23,10 @@ export default function Home() {
 			setTimeOver(true);
 		}
 		if (!timeLeft) return;
+		if (timeLeft % 5 === 0) {
+			// setActivity("motivate");
+			motivateMe();
+		}
 
 		const intervalId = setInterval(() => {
 			setTimeLeft(timeLeft - 1);
@@ -121,7 +126,7 @@ export default function Home() {
 					<div className="content">
 						<DialogBox
 							screen={activity + "On"}
-							// sayMotivation={motivateMe}
+							motivate={motivateMe()}
 						/>
 						<div className="action-box">
 							<h3 className="action-box__title">
@@ -133,7 +138,10 @@ export default function Home() {
 							{!timeOver ? (
 								<button
 									className="action-btn"
-									onClick={changeView}
+									onClick={() => {
+										changeView;
+										setTimeLeft(null);
+									}}
 								>
 									End
 								</button>
