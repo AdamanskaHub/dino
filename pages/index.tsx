@@ -31,7 +31,6 @@ export default function Home() {
 
 		const intervalId = setInterval(() => {
 			setTimeLeft(timeLeft - 1);
-			console.log(timeLeft);
 		}, 1000);
 		// clear interval on re-render to avoid memory leaks
 		return () => clearInterval(intervalId);

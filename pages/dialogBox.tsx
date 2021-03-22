@@ -186,7 +186,7 @@ const DialogBox = forwardRef((props, ref) => {
 		} else if (props === "studyOn") {
 			props = studyOn;
 			setPosition(0);
-			// console.log("position" + position);
+			console.log("position in studyon" + position);
 		}
 		// console.log(lv + ' the prop is **** ' + props[0][0][0].txt)
 		if (position <= props[lv].length - 1) {
@@ -200,7 +200,7 @@ const DialogBox = forwardRef((props, ref) => {
 	useImperativeHandle(ref, () => ({
 		motivate() {
 			console.log("getAlert from Child");
-			nextLine("welcome");
+			nextLine(props.screen);
 		},
 	}));
 
