@@ -140,6 +140,7 @@ export default function Home() {
 									setTimeLeft(null);
 									childRef.current.keepGoing();
 									setActiveView(!activeView);
+									setChoseActivityView(!choseActivityView);
 								}}
 							>
 								{!timeOver ? "Stop" : "Done"}
