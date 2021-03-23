@@ -1,5 +1,6 @@
 import React, { useState, forwardRef, useImperativeHandle } from "react";
 import Message from "./messages";
+import jay from "./jay.json";
 
 interface DialogBoxProps {
 	screen: string;
@@ -201,21 +202,21 @@ const DialogBox = forwardRef((props, ref) => {
 
 	const nextLine = (props) => {
 		if (props === "welcome") {
-			props = welcome;
+			props = "welcome";
 		} else if (props === "study") {
-			props = messages;
+			props = "messages";
 		} else if (props === "keepGoing") {
-			props = keepGoing;
+			props = "keepGoing";
 		} else if (props === "studyOn") {
-			props = studyOn;
+			props = "studyOn";
 			setPosition(0);
 			console.log("position in studyon" + position);
 		}
 		// console.log(lv + ' the prop is **** ' + props[0][0][0].txt)
 		if (position <= props[lv].length - 1) {
 			const randomNum = randomize(props[lv][position]);
-			setPic(props[lv][position][randomNum].pic);
-			setCurrentMessage(props[lv][position][randomNum].txt);
+			setPic(jay.props[lv][position][randomNum].pic);
+			setCurrentMessage(jay.props[lv][position][randomNum].txt);
 			setPosition(position + 1);
 		}
 	};
