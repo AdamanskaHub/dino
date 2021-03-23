@@ -13,7 +13,6 @@ export default function Home() {
 	const [activity, setActivity] = useState("welcome");
 
 	const [timeLeft, setTimeLeft] = useState(null);
-	// const motivateMe = () => childRef.current.motivate();
 	const childRef = useRef();
 
 	useEffect(() => {
@@ -25,7 +24,6 @@ export default function Home() {
 		}
 		if (!timeLeft) return;
 		if (timeLeft % 5 === 0) {
-			// setActivity("motivate");
 			childRef.current.motivate();
 		}
 
@@ -50,7 +48,7 @@ export default function Home() {
 			<main>
 				{!activeView ? (
 					<div className="content">
-						<DialogBox screen={activity} motivateDialog />
+						<DialogBox screen={activity} />
 
 						{!choseActivityView ? (
 							<div className="action-box">
@@ -127,28 +125,25 @@ export default function Home() {
 							screen={activity + "On"}
 							timeLeft={timeLeft}
 							ref={childRef}
-							// motivate={ref={childRef}}
 						/>
 						<div className="action-box">
 							<h3 className="action-box__title">
 								{activity} session
 							</h3>
-							<p>{timeLeft}</p>
+							{/* <p>{timeLeft}</p> */}
 							<Countdown timeLeft={timeLeft} />
 
-							{!timeOver ? (
-								<button
-									className="action-btn"
-									onClick={() => {
-										changeView;
-										setTimeLeft(null);
-									}}
-								>
-									End
-								</button>
-							) : (
-								<p>countdown finished</p>
-							)}
+							<button
+								className="action-btn"
+								onClick={() => {
+									changeView;
+									setTimeLeft(null);
+									childRef.current.keepGoing();
+									setActiveView(!activeView);
+								}}
+							>
+								{!timeOver ? "Stop" : "Done"}
+							</button>
 						</div>
 					</div>
 				)}

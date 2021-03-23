@@ -139,6 +139,27 @@ const welcome = [
 	],
 ];
 
+const keepGoing = [
+	[
+		// Level 0
+		[
+			{ pic: "/jay_smirk.svg", txt: "continue A" },
+			{ pic: "/jay_smirk.svg", txt: "continue B" },
+			{ pic: "/jay_smirk.svg", txt: "continue C" },
+			{ pic: "/jay_smirk.svg", txt: "continue D" },
+		],
+	],
+	[
+		// Level 1
+		[
+			{ pic: "/jay_smirk.svg", txt: "continue XXX A" },
+			{ pic: "/jay_smirk.svg", txt: "continue XXX B" },
+			{ pic: "/jay_smirk.svg", txt: "continue XXX C" },
+			{ pic: "/jay_smirk.svg", txt: "continue XXX D" },
+		],
+	],
+];
+
 let lv = 0;
 const cookieValue = () => {
 	if (document.cookie === undefined || "") {
@@ -183,6 +204,8 @@ const DialogBox = forwardRef((props, ref) => {
 			props = welcome;
 		} else if (props === "study") {
 			props = messages;
+		} else if (props === "keepGoing") {
+			props = keepGoing;
 		} else if (props === "studyOn") {
 			props = studyOn;
 			setPosition(0);
@@ -199,14 +222,14 @@ const DialogBox = forwardRef((props, ref) => {
 
 	useImperativeHandle(ref, () => ({
 		motivate() {
-			console.log("getAlert from Child");
+			console.log("From Child");
 			nextLine(props.screen);
 		},
+		keepGoing() {
+			console.log("KEEEEEEEP");
+			nextLine("keepGoing");
+		},
 	}));
-
-	// if (props.timeLeft % 5 === 0 && props.timeLeft !== null) {
-	// 	nextLine(props.screen);
-	// }
 
 	// console.log('props in dialog box '+props.screen)
 	return (
@@ -220,11 +243,6 @@ const DialogBox = forwardRef((props, ref) => {
 					Next
 				</button>
 			</div>
-			{props.timeLeft % 5 === 0 ? (
-				<p>{props.timeLeft} modulo</p>
-			) : (
-				<p>{props.timeLeft} PASmodulo</p>
-			)}
 		</div>
 	);
 });
