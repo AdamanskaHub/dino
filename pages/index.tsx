@@ -1,5 +1,5 @@
 import Head from "next/head";
-import styles from "../styles/globals.css";
+import styles from "../styles/globals.scss";
 import React, { useEffect, useState, useRef } from "react";
 import Countdown from "./countdown";
 import DialogBox from "./dialogBox";
