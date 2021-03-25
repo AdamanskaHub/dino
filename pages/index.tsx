@@ -19,7 +19,6 @@ export default function Home() {
 		// save intervalId to clear the interval when the component re-renders
 		if (timeLeft === 0) {
 			setTimeLeft(null);
-			console.log("TIME'S UP");
 			setTimeOver(true);
 		}
 		if (!timeLeft) return;
