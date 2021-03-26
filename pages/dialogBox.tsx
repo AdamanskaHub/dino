@@ -90,21 +90,17 @@ const studyOn = [
 const welcome = [
 	[
 		// Level 0
-		[
-			{
-				pic: "/jay_neutral.svg",
-				txt: "welcome welcome",
-			},
-			{ pic: "/jay_smirk.svg", txt: "AAAAAAH 0" },
-		],
-		[
-			{ pic: "/jay_neutral.svg", txt: "welcome 1" },
-			{ pic: "/jay_smirk.svg", txt: "AAAAAAH b1" },
-		],
-		[
-			{ pic: "/jay_neutral.svg", txt: "welcome 2" },
-			{ pic: "/jay_neutral.svg", txt: "AAAAAAH 2" },
-		],
+		[{ pic: "/jay_neutral.svg", txt: "This is my welcome text" }],
+		[{ pic: "/jay_smirk.svg", txt: "Second text" }],
+		[{ pic: "/jay_smirk.svg", txt: "Third text of welcome" }],
+		// [
+		// 	{ pic: "/jay_neutral.svg", txt: "welcome 1" },
+		// 	{ pic: "/jay_smirk.svg", txt: "AAAAAAH b1" },
+		// ],
+		// [
+		// 	{ pic: "/jay_neutral.svg", txt: "welcome 2" },
+		// 	{ pic: "/jay_neutral.svg", txt: "AAAAAAH 2" },
+		// ],
 	],
 	[
 		// Level 1
@@ -211,7 +207,16 @@ const DialogBox = forwardRef((props, ref) => {
 			console.log("position in studyon" + position);
 		}
 		// console.log(lv + ' the prop is **** ' + props[0][0][0].txt)
-		if (position <= props[lv].length - 1) {
+		if (position <= props[lv].length - 1 && lv === 0) {
+			const randomNum = randomize(props[lv][position]);
+			setPic(props[lv][position][randomNum].pic);
+			setCurrentMessage(props[lv][position][randomNum].txt);
+			setPosition(position + 1);
+			if (position == props[lv].length - 1) {
+				console.log("there");
+				document.cookie = `myLv=1; path=/; secure=Lax; samesite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`;
+			}
+		} else if (position <= props[lv].length - 1) {
 			const randomNum = randomize(props[lv][position]);
 			setPic(props[lv][position][randomNum].pic);
 			setCurrentMessage(props[lv][position][randomNum].txt);
