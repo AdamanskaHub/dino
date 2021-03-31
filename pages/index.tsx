@@ -9,15 +9,18 @@ export default function Home() {
 	const changeView = () => setActiveView(!activeView);
 	const [choseActivityView, setChoseActivityView] = useState(false);
 
+	const [timeLeft, setTimeLeft] = useState(null);
 	const [timeOver, setTimeOver] = useState(false);
 	const [activity, setActivity] = useState("welcome");
 
-	const [timeLeft, setTimeLeft] = useState(null);
+	const [lovePoints, setLovePoints] = useState(0);
+
 	const childRef = useRef();
 
 	useEffect(() => {
 		// save intervalId to clear the interval when the component re-renders
 		if (timeLeft === 0) {
+			setLovePoints(lovePoints + 1);
 			setTimeLeft(null);
 			setTimeOver(true);
 		}
@@ -45,6 +48,7 @@ export default function Home() {
 				/>{" "}
 			</Head>
 			<main>
+				<p style={{ color: "red", fontSize: "3rem" }}>{lovePoints}</p>
 				{!activeView ? (
 					<div className="content">
 						<DialogBox screen={activity} />
