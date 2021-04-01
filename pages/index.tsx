@@ -38,10 +38,16 @@ export default function Home() {
 
 	useEffect(() => {
 		document.cookie = `myLovePoints=0; path=/; secure=Lax; samesite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`;
+		console.log(loveCookieValue());
 		parseInt(loveCookieValue()) !== undefined
 			? setLovePoints(parseInt(loveCookieValue()))
 			: setLovePoints(0);
 	}, []);
+
+	useEffect(() => {
+		document.cookie = `myLovePoints=${lovePoints}; path=/; secure=Lax; samesite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`;
+		console.log("love cookie " + loveCookieValue());
+	}, [lovePoints]);
 
 	useEffect(() => {
 		if (timeLeft === 0) {
@@ -73,6 +79,7 @@ export default function Home() {
 				/>{" "}
 			</Head>
 			<main>
+				<h1>{lovePoints}</h1>
 				{!activeView ? (
 					<div className="content">
 						<DialogBox screen={activity} />
