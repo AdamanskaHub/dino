@@ -17,8 +17,33 @@ export default function Home() {
 
 	const childRef = useRef();
 
+	const loveCookieValue = () => {
+		if (
+			document.cookie
+				.split("; ")
+				.find((row) => row.startsWith("myLovePoints="))
+				.split("=")[1] === undefined ||
+			""
+		) {
+			console.log("didn't find love cookie");
+			return "0";
+		} else {
+			console.log("found love cookie");
+			return document.cookie
+				.split("; ")
+				.find((row) => row.startsWith("myLovePoints="))
+				.split("=")[1];
+		}
+	};
+
 	useEffect(() => {
-		// save intervalId to clear the interval when the component re-renders
+		document.cookie = `myLovePoints=0; path=/; secure=Lax; samesite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`;
+		parseInt(loveCookieValue()) !== undefined
+			? setLovePoints(parseInt(loveCookieValue()))
+			: setLovePoints(0);
+	}, []);
+
+	useEffect(() => {
 		if (timeLeft === 0) {
 			setLovePoints(lovePoints + 1);
 			setTimeLeft(null);
@@ -28,7 +53,7 @@ export default function Home() {
 		if (timeLeft % 5 === 0) {
 			childRef.current.motivate();
 		}
-
+		// save intervalId to clear the interval when the component re-renders
 		const intervalId = setInterval(() => {
 			setTimeLeft(timeLeft - 1);
 		}, 1000);
@@ -48,7 +73,6 @@ export default function Home() {
 				/>{" "}
 			</Head>
 			<main>
-				<p style={{ color: "red", fontSize: "3rem" }}>{lovePoints}</p>
 				{!activeView ? (
 					<div className="content">
 						<DialogBox screen={activity} />
@@ -152,6 +176,7 @@ export default function Home() {
 					</div>
 				)}
 			</main>
+			<p style={{ color: "white", fontSize: "1rem" }}>test</p>
 		</div>
 	);
 }

@@ -169,8 +169,6 @@ const cookieValue = () => {
 };
 
 const DialogBox = forwardRef((props, ref) => {
-	// console.log(props.motivate, props.screen);
-	// console.log("props " + JSON.stringify(props) + props.screen);
 	const [currentMessage, setCurrentMessage] = useState("");
 	const [position, setPosition] = useState(0); // position in the text, line #
 	const [pic, setPic] = useState("");
@@ -226,11 +224,9 @@ const DialogBox = forwardRef((props, ref) => {
 
 	useImperativeHandle(ref, () => ({
 		motivate() {
-			console.log("From Child");
 			nextLine(props.screen);
 		},
 		keepGoing() {
-			console.log("KEEEEEEEP");
 			nextLine("keepGoing");
 		},
 	}));
