@@ -113,13 +113,23 @@ export default function Home() {
 									</button>
 									<button
 										className="action-btn"
-										onClick={() => setActivity("workout")}
+										onClick={() => {
+											setActivity("workout");
+											setChoseActivityView(
+												!choseActivityView
+											);
+										}}
 									>
 										Workout
 									</button>
 									<button
 										className="action-btn"
-										onClick={() => setActivity("other")}
+										onClick={() => {
+											setActivity("other");
+											setChoseActivityView(
+												!choseActivityView
+											);
+										}}
 									>
 										Other
 									</button>
