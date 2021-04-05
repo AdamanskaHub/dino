@@ -4,6 +4,7 @@ import Message from "./messages";
 interface DialogBoxProps {
 	screen: string;
 	timeLeft?: number;
+	lovePoints?: number;
 }
 
 const messages = [
@@ -90,17 +91,26 @@ const studyOn = [
 const welcome = [
 	[
 		// Level 0
-		[{ pic: "/jay_neutral.svg", txt: "This is my welcome text" }],
-		[{ pic: "/jay_smirk.svg", txt: "Second text" }],
-		[{ pic: "/jay_smirk.svg", txt: "Third text of welcome" }],
-		// [
-		// 	{ pic: "/jay_neutral.svg", txt: "welcome 1" },
-		// 	{ pic: "/jay_smirk.svg", txt: "AAAAAAH b1" },
-		// ],
-		// [
-		// 	{ pic: "/jay_neutral.svg", txt: "welcome 2" },
-		// 	{ pic: "/jay_neutral.svg", txt: "AAAAAAH 2" },
-		// ],
+		[{ pic: "/jay_neutral.svg", txt: "Hey, welcome." }],
+		[
+			{
+				pic: "/jay_neutral.svg",
+				txt: "I'm Jay. I'm here to help you to get stuff done.",
+			},
+		],
+		[
+			{
+				pic: "/jay_neutral.svg",
+				txt:
+					"Just pick an activity and for how long you want to do it.",
+			},
+		],
+		[
+			{
+				pic: "/jay_smirk.svg",
+				txt: "Let's go.",
+			},
+		],
 	],
 	[
 		// Level 1
@@ -177,6 +187,12 @@ const DialogBox = forwardRef((props, ref) => {
 		return Math.floor(Math.random() * lengthor.length);
 	};
 
+	function downHandler({ key }) {
+		if (key === "Enter" || key === " ") {
+			document.querySelector("button").click();
+		}
+	}
+
 	React.useEffect(() => {
 		window.addEventListener("keydown", downHandler);
 		document.cookie = `myLv=0; path=/; secure=Lax; samesite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`;
@@ -185,12 +201,6 @@ const DialogBox = forwardRef((props, ref) => {
 			: (lv = 0);
 		nextLine("welcome");
 	}, []); // <-- empty array means 'run once'
-
-	function downHandler({ key }) {
-		if (key === "Enter" || key === " ") {
-			document.querySelector("button").click();
-		}
-	}
 
 	const nextLine = (props) => {
 		if (props === "welcome") {
@@ -210,10 +220,10 @@ const DialogBox = forwardRef((props, ref) => {
 			setPic(props[lv][position][randomNum].pic);
 			setCurrentMessage(props[lv][position][randomNum].txt);
 			setPosition(position + 1);
-			if (position == props[lv].length - 1) {
-				console.log("there");
-				document.cookie = `myLv=1; path=/; secure=Lax; samesite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`;
-			}
+			// if (position == props[lv].length - 1) {
+			// 	// console.log("there");
+			// 	document.cookie = `myLv=1; path=/; secure=Lax; samesite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`;
+			// }
 		} else if (position <= props[lv].length - 1) {
 			const randomNum = randomize(props[lv][position]);
 			setPic(props[lv][position][randomNum].pic);
@@ -231,7 +241,7 @@ const DialogBox = forwardRef((props, ref) => {
 		},
 	}));
 
-	// console.log('props in dialog box '+props.screen)
+	// console.log("props in dialog box " + JSON.stringify(props));
 	return (
 		<div className="vn">
 			<div className="character-box">

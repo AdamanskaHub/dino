@@ -51,13 +51,18 @@ export default function Home() {
 
 	useEffect(() => {
 		if (timeLeft === 0) {
-			setLovePoints(lovePoints + 1);
+			// setLovePoints(lovePoints + 1);
 			setTimeLeft(null);
 			setTimeOver(true);
 		}
 		if (!timeLeft) return;
 		if (timeLeft % 5 === 0) {
+			// TO MODIFY
 			childRef.current.motivate();
+		}
+		if (timeLeft % 15 === 0) {
+			setLovePoints(lovePoints + 1);
+			console.log("LOVE POINTS JUST INCREASED " + lovePoints);
 		}
 		// save intervalId to clear the interval when the component re-renders
 		const intervalId = setInterval(() => {
@@ -82,7 +87,12 @@ export default function Home() {
 				<h1>{lovePoints}</h1>
 				{!activeView ? (
 					<div className="content">
-						<DialogBox screen={activity} />
+						<DialogBox
+							screen={activity}
+							timeLeft={timeLeft}
+							ref={childRef}
+							lovePoints={lovePoints}
+						/>
 
 						{!choseActivityView ? (
 							<div className="action-box">
@@ -159,6 +169,7 @@ export default function Home() {
 							screen={activity + "On"}
 							timeLeft={timeLeft}
 							ref={childRef}
+							lovePoints={lovePoints}
 						/>
 						<div className="action-box">
 							<h3 className="action-box__title">
