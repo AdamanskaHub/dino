@@ -11,16 +11,16 @@ const messages = [
 	[
 		// Level 0
 		[
-			{ pic: "/jay_neutral.svg", txt: "ske 0" },
-			{ pic: "/jay_neutral.svg", txt: "frog 0" },
+			{ pic: "/jay_neutral.svg", txt: "ske 0.0" },
+			{ pic: "/jay_neutral.svg", txt: "frog 00" },
 		],
 		[
-			{ pic: "/jay_neutral.svg", txt: "ske 1" },
-			{ pic: "/jay_neutral.svg", txt: "frog b1" },
+			{ pic: "/jay_neutral.svg", txt: "ske 01" },
+			{ pic: "/jay_neutral.svg", txt: "frog 01" },
 		],
 		[
-			{ pic: "/jay_neutral.svg", txt: "ske 2" },
-			{ pic: "/jay_neutral.svg", txt: "frog 2" },
+			{ pic: "/jay_neutral.svg", txt: "ske 02" },
+			{ pic: "/jay_neutral.svg", txt: "frog 02" },
 		],
 	],
 	[
@@ -153,6 +153,12 @@ const keepGoing = [
 			{ pic: "/jay_smirk.svg", txt: "continue C" },
 			{ pic: "/jay_smirk.svg", txt: "continue D" },
 		],
+		[
+			{ pic: "/jay_smirk.svg", txt: "continue A2" },
+			{ pic: "/jay_smirk.svg", txt: "continue B2" },
+			{ pic: "/jay_smirk.svg", txt: "continue C2" },
+			{ pic: "/jay_smirk.svg", txt: "continue D2" },
+		],
 	],
 	[
 		// Level 1
@@ -188,13 +194,18 @@ const DialogBox = forwardRef((props, ref) => {
 	};
 
 	function downHandler({ key }) {
+		let shouldHandleKeyDown = true;
 		if (key === "Enter" || key === " ") {
-			document.querySelector("button").click();
+			if (shouldHandleKeyDown) {
+				document.querySelector("button").click();
+				shouldHandleKeyDown = false;
+			}
 		}
 	}
 
 	React.useEffect(() => {
-		window.addEventListener("keydown", downHandler);
+		console.log("effect activated ******");
+		window.addEventListener("keyup", downHandler);
 		document.cookie = `myLv=0; path=/; secure=Lax; samesite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`;
 		parseInt(cookieValue()) !== undefined
 			? (lv = parseInt(cookieValue()))
@@ -208,27 +219,36 @@ const DialogBox = forwardRef((props, ref) => {
 		} else if (props === "study") {
 			props = messages;
 		} else if (props === "keepGoing") {
+			setPosition(0); // creates a loop
 			props = keepGoing;
 		} else if (props === "studyOn") {
 			props = studyOn;
-			setPosition(0);
-			console.log("position in studyon" + position);
+			setPosition(0); // creates a loop
+			// console.log("position in studyon" + position);
 		}
 		// console.log(lv + ' the prop is **** ' + props[0][0][0].txt)
 		if (position <= props[lv].length - 1 && lv === 0) {
 			const randomNum = randomize(props[lv][position]);
+			console.log("I'm in the if lv0, the random is -- " + randomNum);
 			setPic(props[lv][position][randomNum].pic);
 			setCurrentMessage(props[lv][position][randomNum].txt);
 			setPosition(position + 1);
+			console.log("pos " + position);
+			// ========= J'augmente automatiquement du lv 0 à 1 à la fin ===========
 			// if (position == props[lv].length - 1) {
 			// 	// console.log("there");
 			// 	document.cookie = `myLv=1; path=/; secure=Lax; samesite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`;
 			// }
 		} else if (position <= props[lv].length - 1) {
 			const randomNum = randomize(props[lv][position]);
+			console.log("I'm in the else, the random is -- " + randomNum);
 			setPic(props[lv][position][randomNum].pic);
 			setCurrentMessage(props[lv][position][randomNum].txt);
 			setPosition(position + 1);
+		} else {
+			console.log(
+				"Pos is bigger than props of that lv length. pos-length "
+			);
 		}
 	};
 
@@ -237,6 +257,8 @@ const DialogBox = forwardRef((props, ref) => {
 			nextLine(props.screen);
 		},
 		keepGoing() {
+			setPosition(0);
+			console.log("I'm in keep going - pos " + position);
 			nextLine("keepGoing");
 		},
 	}));

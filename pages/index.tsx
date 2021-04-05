@@ -183,9 +183,10 @@ export default function Home() {
 								onClick={() => {
 									changeView;
 									setTimeLeft(null);
-									childRef.current.keepGoing();
 									setActiveView(!activeView);
 									setChoseActivityView(!choseActivityView);
+									setActivity("keepGoing");
+									// childRef.current.keepGoing();
 								}}
 							>
 								{!timeOver ? "Stop" : "Done"}
