@@ -153,12 +153,6 @@ const keepGoing = [
 			{ pic: "/jay_smirk.svg", txt: "continue C" },
 			{ pic: "/jay_smirk.svg", txt: "continue D" },
 		],
-		[
-			{ pic: "/jay_smirk.svg", txt: "continue A2" },
-			{ pic: "/jay_smirk.svg", txt: "continue B2" },
-			{ pic: "/jay_smirk.svg", txt: "continue C2" },
-			{ pic: "/jay_smirk.svg", txt: "continue D2" },
-		],
 	],
 	[
 		// Level 1
@@ -204,7 +198,6 @@ const DialogBox = forwardRef((props, ref) => {
 	}
 
 	React.useEffect(() => {
-		console.log("effect activated ******");
 		window.addEventListener("keyup", downHandler);
 		document.cookie = `myLv=0; path=/; secure=Lax; samesite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`;
 		parseInt(cookieValue()) !== undefined
@@ -221,6 +214,7 @@ const DialogBox = forwardRef((props, ref) => {
 		} else if (props === "keepGoing") {
 			setPosition(0); // creates a loop
 			props = keepGoing;
+			console.log("position in KEEEEEEP" + position);
 		} else if (props === "studyOn") {
 			props = studyOn;
 			setPosition(0); // creates a loop
@@ -233,12 +227,10 @@ const DialogBox = forwardRef((props, ref) => {
 			setPic(props[lv][position][randomNum].pic);
 			setCurrentMessage(props[lv][position][randomNum].txt);
 			setPosition(position + 1);
-			console.log("pos " + position);
 			// ========= J'augmente automatiquement du lv 0 à 1 à la fin ===========
-			// if (position == props[lv].length - 1) {
-			// 	// console.log("there");
-			// 	document.cookie = `myLv=1; path=/; secure=Lax; samesite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`;
-			// }
+			if (position == props[lv].length - 1) {
+				document.cookie = `myLv=1; path=/; secure=Lax; samesite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`;
+			}
 		} else if (position <= props[lv].length - 1) {
 			const randomNum = randomize(props[lv][position]);
 			console.log("I'm in the else, the random is -- " + randomNum);
@@ -255,9 +247,10 @@ const DialogBox = forwardRef((props, ref) => {
 	useImperativeHandle(ref, () => ({
 		motivate() {
 			nextLine(props.screen);
+			console.log("MOTIVATE");
 		},
 		keepGoing() {
-			setPosition(0);
+			// setPosition(0);
 			console.log("I'm in keep going - pos " + position);
 			nextLine("keepGoing");
 		},

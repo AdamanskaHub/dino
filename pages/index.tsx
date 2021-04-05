@@ -25,10 +25,10 @@ export default function Home() {
 				.split("=")[1] === undefined ||
 			""
 		) {
-			console.log("didn't find love cookie");
+			// console.log("didn't find love cookie");
 			return "0";
 		} else {
-			console.log("found love cookie");
+			// console.log("found love cookie");
 			return document.cookie
 				.split("; ")
 				.find((row) => row.startsWith("myLovePoints="))
@@ -38,7 +38,7 @@ export default function Home() {
 
 	useEffect(() => {
 		document.cookie = `myLovePoints=0; path=/; secure=Lax; samesite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`;
-		console.log(loveCookieValue());
+		// console.log(loveCookieValue());
 		parseInt(loveCookieValue()) !== undefined
 			? setLovePoints(parseInt(loveCookieValue()))
 			: setLovePoints(0);
@@ -46,7 +46,7 @@ export default function Home() {
 
 	useEffect(() => {
 		document.cookie = `myLovePoints=${lovePoints}; path=/; secure=Lax; samesite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`;
-		console.log("love cookie " + loveCookieValue());
+		// console.log("love cookie " + loveCookieValue());
 	}, [lovePoints]);
 
 	useEffect(() => {
@@ -56,7 +56,7 @@ export default function Home() {
 			setTimeOver(true);
 		}
 		if (!timeLeft) return;
-		if (timeLeft % 5 === 0) {
+		if (timeLeft % 5 === 0 && timeLeft != 0 && timeLeft != null) {
 			// TO MODIFY
 			childRef.current.motivate();
 		}
@@ -84,7 +84,7 @@ export default function Home() {
 				/>{" "}
 			</Head>
 			<main>
-				<h1>{lovePoints}</h1>
+				<h1>lp {lovePoints}</h1>
 				{!activeView ? (
 					<div className="content">
 						<DialogBox
@@ -168,6 +168,15 @@ export default function Home() {
 									>
 										15s
 									</button>
+									<button
+										onClick={() =>
+											setChoseActivityView(
+												!choseActivityView
+											)
+										}
+									>
+										Cancel
+									</button>
 								</div>
 							</div>
 						)}
@@ -185,9 +194,7 @@ export default function Home() {
 							<h3 className="action-box__title">
 								{activity} session
 							</h3>
-							{/* <p>{timeLeft}</p> */}
 							<Countdown timeLeft={timeLeft} />
-
 							<button
 								className="action-btn"
 								onClick={() => {
@@ -196,7 +203,7 @@ export default function Home() {
 									setActiveView(!activeView);
 									setChoseActivityView(!choseActivityView);
 									setActivity("keepGoing");
-									// childRef.current.keepGoing();
+									childRef.current.keepGoing();
 								}}
 							>
 								{!timeOver ? "Stop" : "Done"}
