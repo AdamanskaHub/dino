@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 
 type HeartsBarProps = {
-	timeLeft?: number;
 	lovePoints?: number;
 };
 
-export default function HeartsBar({ timeLeft, lovePoints }: HeartsBarProps) {
+export default function HeartsBar({ lovePoints }: HeartsBarProps) {
 	const [heartOneColor, setheartOneColor] = useState("#ffffff85");
 	const [heartTwoColor, setheartTwoColor] = useState("#ffffff85");
 	const [heartThreeColor, setheartThreeColor] = useState("#ffffff85");
@@ -53,6 +52,9 @@ export default function HeartsBar({ timeLeft, lovePoints }: HeartsBarProps) {
 			console.log("love points augmentés LV 2");
 			document.cookie = `myLv=2; path=/; secure=Lax; sameSite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`;
 			setheartOneColor("#e3c56a");
+		} else if (lovePoints >= 0) {
+			console.log("love points augmentés LV 1");
+			document.cookie = `myLv=1; path=/; secure=Lax; sameSite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`;
 		}
 	}, [lovePoints]);
 

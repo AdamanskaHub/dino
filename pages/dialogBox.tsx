@@ -1,4 +1,9 @@
-import React, { useState, forwardRef, useImperativeHandle } from "react";
+import React, {
+	useState,
+	forwardRef,
+	useImperativeHandle,
+	useEffect,
+} from "react";
 import Message from "./messages";
 
 interface DialogBoxProps {
@@ -177,7 +182,8 @@ const cookieValue = () => {
 			.split("=")[1];
 	}
 };
-
+// ================================================================================
+// ================================================================================
 const DialogBox = forwardRef((props, ref) => {
 	// const Component = React.forwardRef<RefType, PropsType>((props, ref) =>
 
@@ -186,9 +192,9 @@ const DialogBox = forwardRef((props, ref) => {
 			nextLine(props.screen);
 		},
 		keepGoing() {
-			// setPosition(0);
-			// console.log("I'm in keep going - pos " + position);
-			nextLine("keepGoing");
+			const randomNum = randomize(keepGoing[lv][0]);
+			setPic(keepGoing[lv][0][randomNum].pic);
+			setCurrentMessage(keepGoing[lv][0][randomNum].txt);
 		},
 	}));
 
@@ -210,7 +216,7 @@ const DialogBox = forwardRef((props, ref) => {
 		}
 	}
 
-	React.useEffect(() => {
+	useEffect(() => {
 		window.addEventListener("keyup", downHandler);
 		document.cookie = `myLv=0; path=/; secure=Lax; samesite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`;
 		parseInt(cookieValue()) !== undefined
@@ -219,15 +225,10 @@ const DialogBox = forwardRef((props, ref) => {
 		nextLine("welcome");
 	}, []); // <-- empty array means 'run once'
 
-	// const checkAndUpdateLoveCookie = () => {
-	// 	if (props.lovePoints >= 10) {
-	// 		console.log("love points augmentés LV 3");
-	// 		document.cookie = `myLv=3; path=/; secure=Lax; samesite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`;
-	// 	} else if (props.lovePoints >= 5) {
-	// 		console.log("love points augmentés LV 2");
-	// 		document.cookie = `myLv=2; path=/; secure=Lax; samesite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`;
-	// 	}
-	// };
+	useEffect(() => {
+		setPosition(0);
+		console.log("activity changed " + position);
+	}, [props.screen]);
 
 	const nextLine = (props) => {
 		// eval() <== transform en var
@@ -235,13 +236,9 @@ const DialogBox = forwardRef((props, ref) => {
 			props = welcome;
 		} else if (props === "study") {
 			props = messages;
-		} else if (props === "keepGoing") {
-			setPosition(0); // creates a loop
-			props = keepGoing;
-			// console.log("position in KEEEEEEP" + position);
 		} else if (props === "studyOn") {
 			props = studyOn;
-			setPosition(0); // creates a loop
+			// setPosition(0); // creates a loop
 			// console.log("position in studyon" + position);
 		}
 		// console.log(lv + ' the prop is **** ' + props[0][0][0].txt)
@@ -252,9 +249,9 @@ const DialogBox = forwardRef((props, ref) => {
 			setCurrentMessage(props[lv][position][randomNum].txt);
 			setPosition(position + 1);
 			// ========= J'augmente automatiquement du lv 0 à 1 à la fin ===========
-			if (position == props[lv].length - 1) {
-				document.cookie = `myLv=1; path=/; secure=Lax; samesite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`;
-			}
+			// if (position == props[lv].length - 1) {
+			// 	document.cookie = `myLv=1; path=/; secure=Lax; samesite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`;
+			// }
 		} else if (position <= props[lv].length - 1) {
 			const randomNum = randomize(props[lv][position]);
 			// console.log("I'm in the else, the random is -- " + randomNum);
@@ -268,7 +265,6 @@ const DialogBox = forwardRef((props, ref) => {
 		}
 	};
 
-	// console.log("props in dialog box " + JSON.stringify(props));
 	return (
 		<div className="vn">
 			<div className="character-box">
