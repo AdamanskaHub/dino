@@ -41,9 +41,21 @@ a {
 }
 
 main {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.hearts {
+  position: absolute;
+  top: var(--space2);
+  right: var(--space2);
+  display: flex;
+
+  .heart {
+    margin-left: 4px;
+  }
 }
 
 .content {

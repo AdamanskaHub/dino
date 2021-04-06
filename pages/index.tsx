@@ -3,6 +3,7 @@ import styles from "../styles/globals.scss";
 import React, { useEffect, useState, useRef } from "react";
 import Countdown from "./countdown";
 import DialogBox from "./dialogBox";
+import HeartBar from "./heartsBar";
 
 export default function Home() {
 	const [activeView, setActiveView] = useState(false);
@@ -37,7 +38,7 @@ export default function Home() {
 	};
 
 	useEffect(() => {
-		document.cookie = `myLovePoints=0; path=/; secure=Lax; samesite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`;
+		document.cookie = `myLovePoints=0; path=/; secure=Lax; sameSite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`;
 		// console.log(loveCookieValue());
 		parseInt(loveCookieValue()) !== undefined
 			? setLovePoints(parseInt(loveCookieValue()))
@@ -45,8 +46,10 @@ export default function Home() {
 	}, []);
 
 	useEffect(() => {
-		document.cookie = `myLovePoints=${lovePoints}; path=/; secure=Lax; samesite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`;
-		// console.log("love cookie " + loveCookieValue());
+		document.cookie = `myLovePoints=${lovePoints}; path=/; secure=Lax; sameSite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`;
+		console.log(
+			"love cookie " + loveCookieValue() + "love points " + lovePoints
+		);
 	}, [lovePoints]);
 
 	useEffect(() => {
@@ -84,6 +87,7 @@ export default function Home() {
 				/>{" "}
 			</Head>
 			<main>
+				<HeartBar timeLeft={timeLeft} lovePoints={lovePoints} />
 				<h1>lp {lovePoints}</h1>
 				{!activeView ? (
 					<div className="content">

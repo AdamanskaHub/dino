@@ -179,6 +179,19 @@ const cookieValue = () => {
 };
 
 const DialogBox = forwardRef((props, ref) => {
+	// const Component = React.forwardRef<RefType, PropsType>((props, ref) =>
+
+	useImperativeHandle(ref, () => ({
+		motivate() {
+			nextLine(props.screen);
+		},
+		keepGoing() {
+			// setPosition(0);
+			// console.log("I'm in keep going - pos " + position);
+			nextLine("keepGoing");
+		},
+	}));
+
 	const [currentMessage, setCurrentMessage] = useState("");
 	const [position, setPosition] = useState(0); // position in the text, line #
 	const [pic, setPic] = useState("");
@@ -206,7 +219,18 @@ const DialogBox = forwardRef((props, ref) => {
 		nextLine("welcome");
 	}, []); // <-- empty array means 'run once'
 
+	// const checkAndUpdateLoveCookie = () => {
+	// 	if (props.lovePoints >= 10) {
+	// 		console.log("love points augmentés LV 3");
+	// 		document.cookie = `myLv=3; path=/; secure=Lax; samesite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`;
+	// 	} else if (props.lovePoints >= 5) {
+	// 		console.log("love points augmentés LV 2");
+	// 		document.cookie = `myLv=2; path=/; secure=Lax; samesite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`;
+	// 	}
+	// };
+
 	const nextLine = (props) => {
+		// eval() <== transform en var
 		if (props === "welcome") {
 			props = welcome;
 		} else if (props === "study") {
@@ -214,7 +238,7 @@ const DialogBox = forwardRef((props, ref) => {
 		} else if (props === "keepGoing") {
 			setPosition(0); // creates a loop
 			props = keepGoing;
-			console.log("position in KEEEEEEP" + position);
+			// console.log("position in KEEEEEEP" + position);
 		} else if (props === "studyOn") {
 			props = studyOn;
 			setPosition(0); // creates a loop
@@ -223,7 +247,7 @@ const DialogBox = forwardRef((props, ref) => {
 		// console.log(lv + ' the prop is **** ' + props[0][0][0].txt)
 		if (position <= props[lv].length - 1 && lv === 0) {
 			const randomNum = randomize(props[lv][position]);
-			console.log("I'm in the if lv0, the random is -- " + randomNum);
+			// console.log("I'm in the if lv0, the random is -- " + randomNum);
 			setPic(props[lv][position][randomNum].pic);
 			setCurrentMessage(props[lv][position][randomNum].txt);
 			setPosition(position + 1);
@@ -233,28 +257,16 @@ const DialogBox = forwardRef((props, ref) => {
 			}
 		} else if (position <= props[lv].length - 1) {
 			const randomNum = randomize(props[lv][position]);
-			console.log("I'm in the else, the random is -- " + randomNum);
+			// console.log("I'm in the else, the random is -- " + randomNum);
 			setPic(props[lv][position][randomNum].pic);
 			setCurrentMessage(props[lv][position][randomNum].txt);
 			setPosition(position + 1);
 		} else {
-			console.log(
-				"Pos is bigger than props of that lv length. pos-length "
-			);
+			// console.log(
+			// 	"Pos is bigger than props of that lv length. pos-length "
+			// );
 		}
 	};
-
-	useImperativeHandle(ref, () => ({
-		motivate() {
-			nextLine(props.screen);
-			console.log("MOTIVATE");
-		},
-		keepGoing() {
-			// setPosition(0);
-			console.log("I'm in keep going - pos " + position);
-			nextLine("keepGoing");
-		},
-	}));
 
 	// console.log("props in dialog box " + JSON.stringify(props));
 	return (
