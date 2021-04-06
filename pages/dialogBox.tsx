@@ -240,6 +240,8 @@ const DialogBox = forwardRef((props, ref) => {
 			props = studyOn;
 			// setPosition(0); // creates a loop
 			// console.log("position in studyon" + position);
+		} else {
+			return;
 		}
 		// console.log(lv + ' the prop is **** ' + props[0][0][0].txt)
 		if (position <= props[lv].length - 1 && lv === 0) {
