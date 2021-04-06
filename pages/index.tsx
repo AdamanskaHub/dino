@@ -223,10 +223,15 @@ export default function Home() {
 
 // TODO
 // ---  Penser que c'est comme l'autre jeu débile ---
-// Intro dialogue
-// Choisir ce que je veux faire
-// lancer le timer => qd il est fini dialogue "inbetween"
-// Nouveau dialogue "encouragements" selon activité
-// Autre choix
+// √ Intro dialogue
+// √ Choisir ce que je veux faire
+// √ lancer le timer =>
+// √ qd il est fini dialogue "inbetween"
+// √ Nouveau dialogue "encouragements" selon activité
+// √ Autre choix
+// 1h display issue
+// Actual intro dialogs
+// When a new level is reach and timer is not active => show new level dial
+// create upgraded level type of arrays
 
 // Si activité est study mais countdown actif alors autre TextEncoder, on passe {activity}+timeon
