@@ -48,7 +48,7 @@ export default function Home() {
 	useEffect(() => {
 		document.cookie = `myLovePoints=${lovePoints}; path=/; secure=Lax; sameSite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`;
 		console.log(
-			"love cookie " + loveCookieValue() + "love points " + lovePoints
+			"%c♥️ love cookie " + loveCookieValue() + " love points " + lovePoints , 'color: #fa4a7f'
 		);
 	}, [lovePoints]);
 
@@ -63,15 +63,14 @@ export default function Home() {
 			// TO MODIFY
 			childRef.current.motivate();
 		}
-		if (timeLeft % 15 === 0) {
+		if (timeLeft % 15 === 0) { // % du nombre de secondes pour avoir un point
 			setLovePoints(lovePoints + 1);
-			console.log("LOVE POINTS JUST INCREASED " + lovePoints);
+			console.log("%cLOVE POINTS JUST INCREASED " + lovePoints, 'color:#7d2ee6');
 		}
 		// save intervalId to clear the interval when the component re-renders
 		const intervalId = setInterval(() => {
 			setTimeLeft(timeLeft - 1);
-		}, 1000);
-		// clear interval on re-render to avoid memory leaks
+		}, 1000); // clear interval on re-render to avoid memory leaks
 		return () => clearInterval(intervalId);
 	}, [timeLeft]);
 
@@ -216,7 +215,6 @@ export default function Home() {
 					</div>
 				)}
 			</main>
-			<p style={{ color: "white", fontSize: "1rem" }}>test</p>
 		</div>
 	);
 }

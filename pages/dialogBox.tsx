@@ -6,11 +6,11 @@ import React, {
 } from "react";
 import Message from "./messages";
 
-interface DialogBoxProps {
-	screen: string;
-	timeLeft?: number;
-	lovePoints?: number;
-}
+// interface DialogBoxProps {
+// 	screen: string;
+// 	timeLeft?: number;
+// 	lovePoints?: number;
+// }
 
 const messages = [
 	[
@@ -227,7 +227,7 @@ const DialogBox = forwardRef((props, ref) => {
 
 	useEffect(() => {
 		setPosition(0);
-		console.log("activity changed " + position);
+		console.log("%cActivity changed, position=> " + position,'color:#6ed64e');
 	}, [props.screen]);
 
 	const nextLine = (props) => {
