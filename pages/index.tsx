@@ -15,8 +15,8 @@ export default function Home() {
 	const [timeOver, setTimeOver] = useState(false);
 	const [activity, setActivity] = useState("welcome");
 
-	const [lovePoints, setLovePoints] = useState(null);
-	const [level, setLevel] = useState(null);
+	const [lovePoints, setLovePoints] = useState(0);
+	const [level, setLevel] = useState(0);
 
 	const childRef = useRef();
 
@@ -34,12 +34,12 @@ export default function Home() {
 	useEffect(() => {
 		if (document.cookie) {
 // document.cookie.match(/^(.*;)?\s*MyLovePoints\s*=\s*[^;]+(.*)?$/)
-			console.log('🍪 cookie exist', document.cookie,);
+			console.log(`🍪 cookie exist ${document.cookie}`);
 			
-			let templove = document.cookie.match('(^|;)\\s*' + 'MyLovePoints' + '\\s*=\\s*([^;]+)')?.pop() || ''
+			let templove = document.cookie.match('(^|;)\\s*' + 'myLovePoints' + '\\s*=\\s*([^;]+)')?.pop() || ''
 			let templv = document.cookie.match('(^|;)\\s*' + 'MyLv' + '\\s*=\\s*([^;]+)')?.pop() || ''
 
-			console.log('%c🍪', templove, templv, 'color:#9b5454')
+			console.log(`%c🍪 love ${templove} lv ${templv}`, 'color:#9b5454')
 			updateLv(templv, templove)
 			
     } else {
@@ -71,8 +71,8 @@ export default function Home() {
 			// TO MODIFY
 			childRef.current.motivate();
 		}
-		if (timeLeft % 15 === 0) { // % du nombre de secondes pour avoir un point
-			setLovePoints(lovePoints + 1);
+		if (timeLeft % 15 === 0) { // % du nombre de secondes pour avoir un point MATHFLOOR to make int IMPORTANT
+			setLovePoints(Math.floor(lovePoints) + 1);
 			console.log("%cLOVE POINTS JUST INCREASED " + lovePoints, 'color:#a66af5');
 		}
 		// save intervalId to clear the interval when the component re-renders
@@ -100,7 +100,6 @@ export default function Home() {
 expires=Tue, 01 Jan 2030 00:00:00 GMT"`}>BRING ME AT LEVEL 3</button>
 <button onClick={() => document.cookie = `myLv=0; path=/; secure=Lax; samesite=Lax; 
 expires=Tue, 01 Jan 2030 00:00:00 GMT"`}>BRING ME AT LEVEL 0</button> */}
-				<button onClick={()=>console.log(document.cookie.indexOf('myLovePoints='))}>local?</button>
 				{!activeView ? (
 					<div className="content">
 						<DialogBox
@@ -108,6 +107,7 @@ expires=Tue, 01 Jan 2030 00:00:00 GMT"`}>BRING ME AT LEVEL 0</button> */}
 							timeLeft={timeLeft}
 							ref={childRef}
 							lovePoints={lovePoints}
+							level={level}
 						/>
 
 						{!choseActivityView ? (
@@ -204,7 +204,8 @@ expires=Tue, 01 Jan 2030 00:00:00 GMT"`}>BRING ME AT LEVEL 0</button> */}
 							screen={activity + "On"}
 							timeLeft={timeLeft}
 							ref={childRef}
-							lovePoints={lovePoints}
+								lovePoints={lovePoints}
+								level={level}
 						/>
 						<div className="action-box">
 							<h3 className="action-box__title">

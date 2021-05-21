@@ -332,31 +332,31 @@ const keepGoing = [
 	],
 ];
 
-let lv = 0;
-const cookieValue = () => {
-	if (document.cookie === undefined || "") {
-		return "0";
-	} else {
-		// console.log('cookie creation : '+document.cookie)
-		return document.cookie
-			.split("; ")
-			.find((row) => row.startsWith("myLv="))
-			.split("=")[1];
-	}
-};
+// let lv = props.level;
+// const cookieValue = () => {
+// 	if (document.cookie === undefined || "") {
+// 		return "0";
+// 	} else {
+// 		// console.log('cookie creation : '+document.cookie)
+// 		return document.cookie
+// 			.split("; ")
+// 			.find((row) => row.startsWith("myLv="))
+// 			.split("=")[1];
+// 	}
+// };
 // ================================================================================
 // ================================================================================
 const DialogBox = forwardRef((props, ref) => {
 	// const Component = React.forwardRef<RefType, PropsType>((props, ref) =>
-
+	let lv = props.level ? props.level : 0;
 	useImperativeHandle(ref, () => ({
 		motivate() {
 			nextLine(props.screen);
 		},
 		keepGoing() {
-			const randomNum = randomize(keepGoing[lv][0]);
-			setPic(keepGoing[lv][0][randomNum].pic);
-			setCurrentMessage(keepGoing[lv][0][randomNum].txt);
+			const randomNum = randomize(keepGoing[props.level][0]);
+			setPic(keepGoing[props.level][0][randomNum].pic);
+			setCurrentMessage(keepGoing[props.level][0][randomNum].txt);
 		},
 	}));
 
@@ -380,10 +380,10 @@ const DialogBox = forwardRef((props, ref) => {
 
 	useEffect(() => {
 		window.addEventListener("keyup", downHandler);
-		document.cookie = `myLv=0; path=/; secure=Lax; samesite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`;
-		parseInt(cookieValue()) !== undefined
-			? (lv = parseInt(cookieValue()))
-			: (lv = 0);
+		// document.cookie = `myLv=0; path=/; secure=Lax; samesite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`;
+		// parseInt(cookieValue()) !== undefined
+		// 	? (lv = parseInt(cookieValue()))
+		// 	: (lv = 0);
 		nextLine("welcome");
 	}, []); // <-- empty array means 'run once'
 
@@ -413,7 +413,7 @@ const DialogBox = forwardRef((props, ref) => {
 		} else {
 			return;
 		}
-		// console.log(lv + ' the prop is **** ' + props[0][0][0].txt)
+		// console.log(props[lv] + ' the prop is **** ' + props[0][0][0].txt)
 		if (position <= props[lv].length - 1 && lv === 0) {
 			const randomNum = randomize(props[lv][position]);
 			// console.log("I'm in the if lv0, the random is -- " + randomNum);
@@ -422,7 +422,7 @@ const DialogBox = forwardRef((props, ref) => {
 			setPosition(position + 1);
 			// ========= J'augmente automatiquement du lv 0 à 1 à la fin ===========
 			// if (position == props[lv].length - 1) {
-			// 	document.cookie = `myLv=1; path=/; secure=Lax; samesite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`;
+			// 	document.cookie = `mylv=1; path=/; secure=Lax; samesite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`;
 			// }
 		} else if (position <= props[lv].length - 1) {
 			const randomNum = randomize(props[lv][position]);
