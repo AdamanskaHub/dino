@@ -23,9 +23,6 @@ export default function Countdown({ timeLeft }: CountdownProps) {
 		if (min < 10 ) {
 			min = '0'+ min;
 		}
-		// if (hours !== 0 ) {
-		// 	hours = '0'+ hours;
-		// }
 
 		return hours == 0 
 			? `${min}:${sec}`

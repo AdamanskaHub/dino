@@ -4,6 +4,7 @@ import React, { useEffect, useState, useRef } from "react";
 import Countdown from "./countdown";
 import DialogBox from "./dialogBox";
 import HeartBar from "./heartsBar";
+// import { getCookieParser } from "next/dist/next-server/server/api-utils";
 
 export default function Home() {
 	const [activeView, setActiveView] = useState(false);
@@ -14,42 +15,49 @@ export default function Home() {
 	const [timeOver, setTimeOver] = useState(false);
 	const [activity, setActivity] = useState("welcome");
 
-	const [lovePoints, setLovePoints] = useState(0);
+	const [lovePoints, setLovePoints] = useState(null);
+	const [level, setLevel] = useState(null);
 
 	const childRef = useRef();
 
-	const loveCookieValue = () => {
-		if (
-			document.cookie
-				.split("; ")
-				.find((row) => row.startsWith("myLovePoints="))
-				.split("=")[1] === undefined ||
-			""
-		) {
-			// console.log("didn't find love cookie");
-			return "0";
-		} else {
-			// console.log("found love cookie");
-			return document.cookie
-				.split("; ")
-				.find((row) => row.startsWith("myLovePoints="))
-				.split("=")[1];
-		}
-	};
+
+
+	const updateLv = (lv, love) => {
+		console.log('%cUPDATE HAPPENING',lv,love,'color:#97a1ff')
+		document.cookie = `myLv=${lv}; myLovePoints=${love} my path=/; secure=Lax; sameSite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`;
+		setLevel(lv)
+		setLovePoints(love)
+	}
+
+	
 
 	useEffect(() => {
-		document.cookie = `myLovePoints=0; path=/; secure=Lax; sameSite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`;
-		// console.log(loveCookieValue());
-		parseInt(loveCookieValue()) !== undefined
-			? setLovePoints(parseInt(loveCookieValue()))
-			: setLovePoints(0);
-	}, []);
+		if (document.cookie) {
+// document.cookie.match(/^(.*;)?\s*MyLovePoints\s*=\s*[^;]+(.*)?$/)
+			console.log('🍪 cookie exist', document.cookie,);
+			
+			let templove = document.cookie.match('(^|;)\\s*' + 'MyLovePoints' + '\\s*=\\s*([^;]+)')?.pop() || ''
+			let templv = document.cookie.match('(^|;)\\s*' + 'MyLv' + '\\s*=\\s*([^;]+)')?.pop() || ''
+
+			console.log('%c🍪', templove, templv, 'color:#9b5454')
+			updateLv(templv, templove)
+			
+    } else {
+			console.log('🍪 no cookie', document.cookie);
+			updateLv(0,0)
+    }
+	}, [])
 
 	useEffect(() => {
+		console.log('💗💗💗Love points activated💗💗💗')
 		document.cookie = `myLovePoints=${lovePoints}; path=/; secure=Lax; sameSite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`;
-		console.log(
-			"%c♥️ love cookie " + loveCookieValue() + " love points " + lovePoints , 'color: #fa4a7f'
-		);
+		// console.log(
+		// 	"%c♥️ love cookie " + loveCookieValue() + " love points " + lovePoints , 'color: #fa4a7f'
+		// );
+
+		lovePoints >= 10 && level === 1 && updateLv(2, lovePoints);
+		lovePoints >= 5 && level === 0 && updateLv(1, lovePoints);
+
 	}, [lovePoints]);
 
 	useEffect(() => {
@@ -65,7 +73,7 @@ export default function Home() {
 		}
 		if (timeLeft % 15 === 0) { // % du nombre de secondes pour avoir un point
 			setLovePoints(lovePoints + 1);
-			console.log("%cLOVE POINTS JUST INCREASED " + lovePoints, 'color:#7d2ee6');
+			console.log("%cLOVE POINTS JUST INCREASED " + lovePoints, 'color:#a66af5');
 		}
 		// save intervalId to clear the interval when the component re-renders
 		const intervalId = setInterval(() => {
@@ -88,6 +96,11 @@ export default function Home() {
 			<main>
 				<HeartBar timeLeft={timeLeft} lovePoints={lovePoints} />
 				<h1>lp {lovePoints}</h1>
+				{/* <button onClick={() => document.cookie = `myLv=3; my path=/; secure=Lax; samesite=Lax; 
+expires=Tue, 01 Jan 2030 00:00:00 GMT"`}>BRING ME AT LEVEL 3</button>
+<button onClick={() => document.cookie = `myLv=0; path=/; secure=Lax; samesite=Lax; 
+expires=Tue, 01 Jan 2030 00:00:00 GMT"`}>BRING ME AT LEVEL 0</button> */}
+				<button onClick={()=>console.log(document.cookie.indexOf('myLovePoints='))}>local?</button>
 				{!activeView ? (
 					<div className="content">
 						<DialogBox
@@ -233,3 +246,31 @@ export default function Home() {
 // create upgraded level type of arrays
 
 // Si activité est study mais countdown actif alors autre TextEncoder, on passe {activity}+timeon
+
+
+// const loveCookieValue = () => {
+	// 	if (
+	// 		document.cookie
+	// 			.split("; ")
+	// 			.find((row) => row.startsWith("myLovePoints="))
+	// 			.split("=")[1] === undefined ||
+	// 		""
+	// 	) {
+	// 		// console.log("didn't find love cookie");
+	// 		return "0";
+	// 	} else {
+	// 		// console.log("found love cookie");
+	// 		return document.cookie
+	// 			.split("; ")
+	// 			.find((row) => row.startsWith("myLovePoints="))
+	// 			.split("=")[1];
+	// 	}
+	// };
+
+	// useEffect(() => {
+	// 	document.cookie = `myLovePoints=0; path=/; secure=Lax; sameSite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`;
+	// 	// console.log(loveCookieValue());
+	// 	parseInt(loveCookieValue()) !== undefined
+	// 		? setLovePoints(parseInt(loveCookieValue()))
+	// 		: setLovePoints(0);
+	// }, []);

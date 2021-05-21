@@ -53,7 +53,7 @@ export default function HeartsBar({ lovePoints }: HeartsBarProps) {
 			console.log("%clove points augmentés LV 2",'color:#00d5e4');
 			document.cookie = `myLv=2; path=/; secure=Lax; sameSite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`;
 			setheartOneColor("#e3c56a");
-		} else if (lovePoints >= 0) {
+		} else if (lovePoints > 0) {
 			console.log("%clove points augmentés LV 1",'color:#00d5e4');
 			document.cookie = `myLv=1; path=/; secure=Lax; sameSite=Lax; expires=Tue, 01 Jan 2030 00:00:00 GMT"`;
 		}

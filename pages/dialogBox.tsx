@@ -12,12 +12,12 @@ import Message from "./messages";
 // 	lovePoints?: number;
 // }
 
-const messages = [
+const study = [
 	[
 		// Level 0
 		[
 			{ pic: "/jay_neutral.svg", txt: "ske 0.0" },
-			{ pic: "/jay_neutral.svg", txt: "frog 00" },
+			{ pic: "/jay_neutral.svg", txt: "study 00" },
 		],
 		[
 			{ pic: "/jay_neutral.svg", txt: "ske 01" },
@@ -93,10 +93,172 @@ const studyOn = [
 	],
 ];
 
+const workout = [
+	[
+		// Level 0
+		[
+			{ pic: "/jay_neutral.svg", txt: "workout 0.0" },
+			{ pic: "/jay_neutral.svg", txt: "workout 00" },
+		],
+		[
+			{ pic: "/jay_neutral.svg", txt: "workout 01" },
+			{ pic: "/jay_neutral.svg", txt: "workout 01" },
+		],
+		[
+			{ pic: "/jay_neutral.svg", txt: "workout 02" },
+			{ pic: "/jay_neutral.svg", txt: "workout 02" },
+		],
+	],
+	[
+		// Level 1
+		[
+			{ pic: "/jay_neutral.svg", txt: "workout 1.0" },
+			{ pic: "/jay_neutral.svg", txt: "workout 1.0" },
+		],
+		[
+			{ pic: "/jay_neutral.svg", txt: "workout 1.1" },
+			{ pic: "/jay_neutral.svg", txt: "workout b1.1" },
+		],
+		[
+			{ pic: "/jay_neutral.svg", txt: "workout 1.2" },
+			{ pic: "/jay_neutral.svg", txt: "workout 1.2" },
+		],
+	],
+	[
+		// Level 2
+		[
+			{ pic: "/jay_neutral.svg", txt: "workout 2.0" },
+			{ pic: "/jay_neutral.svg", txt: "workout 2.0" },
+		],
+		[
+			{ pic: "/jay_neutral.svg", txt: "workout 2.1" },
+			{ pic: "/jay_neutral.svg", txt: "workout b2.1" },
+		],
+		[
+			{ pic: "/jay_neutral.svg", txt: "workout 2.2" },
+			{ pic: "/jay_neutral.svg", txt: "workout 2.2" },
+		],
+	],
+];
+
+const workoutOn = [
+	[
+		// Level 0
+		[
+			{ pic: "/jay_frown.svg", txt: "workout ON 0" },
+			{ pic: "/jay_frown.svg", txt: "workout ON 0" },
+		],
+		[
+			{ pic: "/jay_frown.svg", txt: "workout ON 1" },
+			{ pic: "/jay_frown.svg", txt: "workout ON b1" },
+		],
+		[
+			{ pic: "/jay_frown.svg", txt: "workout ON 2" },
+			{ pic: "/jay_frown.svg", txt: "workout ON b2" },
+		],
+	],
+	[
+		// Level 1
+		[
+			{ pic: "/jay_frown.svg", txt: "workout 1.0" },
+			{ pic: "/jay_frown.svg", txt: "workout 1.0" },
+		],
+		[
+			{ pic: "/jay_frown.svg", txt: "workout 1.1" },
+			{ pic: "/jay_frown.svg", txt: "workout b1.1" },
+		],
+		[
+			{ pic: "/jay_frown.svg", txt: "workout 1.2" },
+			{ pic: "/jay_frown.svg", txt: "workout 1.2" },
+		],
+	],
+];
+
+const other = [
+	[
+		// Level 0
+		[
+			{ pic: "/jay_neutral.svg", txt: "other 0.0" },
+			{ pic: "/jay_neutral.svg", txt: "other 00" },
+		],
+		[
+			{ pic: "/jay_neutral.svg", txt: "other 01" },
+			{ pic: "/jay_neutral.svg", txt: "other 01" },
+		],
+		[
+			{ pic: "/jay_neutral.svg", txt: "other 02" },
+			{ pic: "/jay_neutral.svg", txt: "other 02" },
+		],
+	],
+	[
+		// Level 1
+		[
+			{ pic: "/jay_neutral.svg", txt: "other 1.0" },
+			{ pic: "/jay_neutral.svg", txt: "other 1.0" },
+		],
+		[
+			{ pic: "/jay_neutral.svg", txt: "other 1.1" },
+			{ pic: "/jay_neutral.svg", txt: "other b1.1" },
+		],
+		[
+			{ pic: "/jay_neutral.svg", txt: "other 1.2" },
+			{ pic: "/jay_neutral.svg", txt: "other 1.2" },
+		],
+	],
+	[
+		// Level 2
+		[
+			{ pic: "/jay_neutral.svg", txt: "other 2.0" },
+			{ pic: "/jay_neutral.svg", txt: "other 2.0" },
+		],
+		[
+			{ pic: "/jay_neutral.svg", txt: "other 2.1" },
+			{ pic: "/jay_neutral.svg", txt: "other b2.1" },
+		],
+		[
+			{ pic: "/jay_neutral.svg", txt: "other 2.2" },
+			{ pic: "/jay_neutral.svg", txt: "other 2.2" },
+		],
+	],
+];
+
+const otherOn = [
+	[
+		// Level 0
+		[
+			{ pic: "/jay_frown.svg", txt: "other ON 0" },
+			{ pic: "/jay_frown.svg", txt: "other ON 0" },
+		],
+		[
+			{ pic: "/jay_frown.svg", txt: "other ON 1" },
+			{ pic: "/jay_frown.svg", txt: "other ON b1" },
+		],
+		[
+			{ pic: "/jay_frown.svg", txt: "other ON 2" },
+			{ pic: "/jay_frown.svg", txt: "other ON b2" },
+		],
+	],
+	[
+		// Level 1
+		[
+			{ pic: "/jay_frown.svg", txt: "other 1.0" },
+			{ pic: "/jay_frown.svg", txt: "other 1.0" },
+		],
+		[
+			{ pic: "/jay_frown.svg", txt: "other 1.1" },
+			{ pic: "/jay_frown.svg", txt: "other b1.1" },
+		],
+		[
+			{ pic: "/jay_frown.svg", txt: "other 1.2" },
+			{ pic: "/jay_frown.svg", txt: "other 1.2" },
+		],
+	],
+];
+
 const welcome = [
 	[
 		// Level 0
-		[{ pic: "/jay_neutral.svg", txt: "Hey, welcome." }],
+		[{ pic: "/jay_neutral.svg", txt: "Hey, welcome." },],
 		[
 			{
 				pic: "/jay_neutral.svg",
@@ -121,30 +283,30 @@ const welcome = [
 		// Level 1
 		[
 			{ pic: "/jay_neutral.svg", txt: "welcome 1.0" },
-			{ pic: "/jay_neutral.svg", txt: "AAAAAAH 1.0" },
+			{ pic: "/jay_neutral.svg", txt: "welcome222 1.0" },
 		],
 		[
 			{ pic: "/jay_neutral.svg", txt: "welcome 1.1" },
-			{ pic: "/jay_neutral.svg", txt: "AAAAAAH b1.1" },
+			{ pic: "/jay_neutral.svg", txt: "welcome222 b1.1" },
 		],
 		[
 			{ pic: "/jay_neutral.svg", txt: "welcome 1.2" },
-			{ pic: "/jay_neutral.svg", txt: "AAAAAAH 1.2" },
+			{ pic: "/jay_neutral.svg", txt: "welcome222 1.2" },
 		],
 	],
 	[
 		// Level 2
 		[
 			{ pic: "/jay_neutral.svg", txt: "welcome 2.0" },
-			{ pic: "/jay_neutral.svg", txt: "AAAAAAH 2.0" },
+			{ pic: "/jay_neutral.svg", txt: "welcome222 2.0" },
 		],
 		[
 			{ pic: "/jay_neutral.svg", txt: "welcome 2.1" },
-			{ pic: "/jay_neutral.svg", txt: "AAAAAAH b2.1" },
+			{ pic: "/jay_neutral.svg", txt: "welcome222 b2.1" },
 		],
 		[
 			{ pic: "/jay_neutral.svg", txt: "welcome 2.2" },
-			{ pic: "/jay_neutral.svg", txt: "AAAAAAH 2.2" },
+			{ pic: "/jay_neutral.svg", txt: "welcome222 2.2" },
 		],
 	],
 ];
@@ -235,9 +397,17 @@ const DialogBox = forwardRef((props, ref) => {
 		if (props === "welcome") {
 			props = welcome;
 		} else if (props === "study") {
-			props = messages;
+			props = study;
 		} else if (props === "studyOn") {
 			props = studyOn;
+		} else if (props === "workout") {
+			props = workout;
+		} else if (props === "workoutOn") {
+			props = workoutOn;
+		}else if (props === "other") {
+			props = other;
+		} else if (props === "otherOn") {
+			props = otherOn;
 			// setPosition(0); // creates a loop
 			// console.log("position in studyon" + position);
 		} else {
@@ -283,7 +453,6 @@ const DialogBox = forwardRef((props, ref) => {
 });
 
 // TO DO :
-// Move text to other file
 // when I get a level increase it in the lv and in the cookie myLv, always both
 export default DialogBox;
 
