@@ -241,10 +241,15 @@ expires=Tue, 01 Jan 2030 00:00:00 GMT"`}>BRING ME AT LEVEL 0</button> */}
 // √ qd il est fini dialogue "inbetween"
 // √ Nouveau dialogue "encouragements" selon activité
 // √ Autre choix
-// 1h display issue
-// Actual intro dialogs
-// When a new level is reach and timer is not active => show new level dial
-// create upgraded level type of arrays
+// √ 1h display issue
+
+// [] inter level dialogs // When a new level is reach and timer is not active => show new level dial
+// [] styling
+// [] real text for dialogs
+// [] img optimization
+// [] lv in heartbar
+// [] mobile responsive
+// [] stats of how long I've worked (you've been focusing for depuis lv on déduit le temps ex:"+8h")
 
 // Si activité est study mais countdown actif alors autre TextEncoder, on passe {activity}+timeon
 
